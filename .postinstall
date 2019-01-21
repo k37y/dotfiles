@@ -1,0 +1,30 @@
+cat << EOF >> /etc/dnsmasq.conf
+conf-dir=/home/kevy/.dnsmasq.d/,*.conf
+EOF
+
+cat << EOF >> /etc/resolv.dnsmasq
+nameserver 8.8.8.8
+nameserver 8.8.4.4
+EOF
+
+touch /etc/wpa_supplicant/wpa_supplicant.conf
+cat << EOF >> /etc/wpa_supplicant/wpa_supplicant.conf
+ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev
+update_config=1
+
+network={
+    ssid="SSID"
+    psk="PSK"
+    id_str="ID"
+}
+
+network={
+    ssid=""
+    key_mgmt=NONE
+    id_str="open"
+}
+EOF
+
+virsh pool-define-as --name default --type dir --target $HOME/VMs
+virsh pool-autostart default
+virsh pool-start default

@@ -1,0 +1,10 @@
+table Icon
+  Caption: Chromium
+  Command: chromium-browser --incognito
+  Icon: /usr/share/icons/gnome/256x256/apps/web-browser.png
+  Width: 48
+  Height: 48
+  X: 65
+  Y: 127
+end
+

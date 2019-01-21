@@ -1,0 +1,15 @@
+!------------------------------!
+!   dropdown color config      !
+!------------------------------!
+dropdown*VT100.Translations: #override Ctrl Shift <Key>V: insert-selection(CLIPBOARD) \n Ctrl Shift <Key>C: copy-selection(CLIPBOARD)
+dropdown*faceName: Monospace:style=Book:antialias=false
+dropdown*faceNameDoublesize: WenQuanYi Bitmap Song
+dropdown*faceSize: 12
+dropdown*borderWidth: 18
+#define _ddcolor0 #ffffff
+#define _ddcolor1 #181818
+dropdown*forground : _ddcolor0
+dropdown*borderColor : _ddcolor1
+dropdown*background : _ddcolor1
+dropdown*cursorcolor : _ddcolor0
+

@@ -1,0 +1,9 @@
+( if
+( or
+( contains ( window_class ) "nameoftheapplication" )
+( contains ( application_name ) "nameoftheapplication" )
+)
+( begin
+( spawn_async (str "transset-df -i " (window_xid) " 0.85" ))
+)
+)

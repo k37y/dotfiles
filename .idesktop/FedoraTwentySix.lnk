@@ -1,0 +1,10 @@
+table Icon
+  Caption: Fedora-TwentySix
+  Command: virt-viewer -f Fedora-TwentySix
+  Icon: /usr/share/icons/gnome/256x256/devices/computer.png
+  Width: 48
+  Height: 48
+  X: 65
+  Y: 27
+end
+

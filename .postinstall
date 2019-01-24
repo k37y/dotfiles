@@ -28,3 +28,8 @@ EOF
 virsh pool-define-as --name default --type dir --target $HOME/VMs
 virsh pool-autostart default
 virsh pool-start default
+
+cd $HOME
+git crypt init
+git crypt add-gpg-user kevy.vinu@gmail.com
+git crypt unlock

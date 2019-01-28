@@ -16,8 +16,6 @@ groff
 notify-osd
 qrencode
 xbacklight
-mpv
-youtube-viewer
 pv
 dnsmasq
 libreoffice
@@ -33,3 +31,8 @@ zenity
 rdesktop
 git-crypt
 vim-gtk
+acpi
+youtube-viewer
+mpv
+tor
+libnotify-bin

@@ -75,5 +75,5 @@ URxvt*colorIT        : _colorIT
 URxvt*colorUL        : _colorUL
 URxvt*foreground     : _foreground
 URxvt*background     : _black
-URxvt*borderColor    : _black
+URxvt*borderColor    : _color4
 URxvt*cursorColor : _cursorColor

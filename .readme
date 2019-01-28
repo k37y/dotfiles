@@ -1,0 +1,2 @@
+# Put certificate in /usr/share/ca-certificates and update before adding ppa repository
+# Install arc theme manually

@@ -187,7 +187,7 @@ bindsym --release $mod+Up exec --no-startup-id pactl set-sink-volume 0 +5%
 bindsym --release $mod+Down exec --no-startup-id pactl set-sink-volume 0 -5%
 bindsym --release $mod+Shift+m exec --no-startup-id pactl set-sink-mute 0 0 && notify-send -i /usr/share/icons/Adwaita/32x32/devices/audio-speakers.png Unmute
 bindsym --release $mod+m exec --no-startup-id pactl set-sink-mute 0 1 && notify-send -i /usr/share/icons/Adwaita/32x32/devices/audio-speakers.png Mute
-bindsym --release $mod+w exec --no-startup-id rdesktop -g 95% -uAdministrator $(zenity --title "RDP" --entry --text "Enter RDP IP")
+bindsym --release $mod+w exec --no-startup-id rdesktop -g 95% -uAdministrator $(zenity --entry --title "RDP" --text "Enter RDP IP")
 
 #ranger
 bindsym --release $mod+g exec rxvt-unicde -e ranger

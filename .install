@@ -13,7 +13,7 @@ fi
 read -p "Do you want to install packages [y/N]? " -r
 if [[ $REPLY =~ ^[Yy]$ ]]; then
 	sudo apt update
-	xargs -a $HOME/.packages sudo apt install
+	sudo apt install -y $(grep -vE "^\s*#" $HOME/.packages | xargs)
 else
         echo -e "Cancelled\n"
 fi

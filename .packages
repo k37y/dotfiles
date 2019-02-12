@@ -23,9 +23,9 @@ zathura
 gnome-screenshot
 pulseaudio
 samba
-qemu-kvm
-libvirt-bin
-virt-manager
+# qemu-kvm
+# libvirt-bin
+# virt-manager
 sshfs
 zenity
 rdesktop
@@ -37,3 +37,5 @@ mpv
 tor
 libnotify-bin
 xsel
+xautolock
+xtrlock

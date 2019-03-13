@@ -185,3 +185,8 @@ PATH=$PATH:$HOME/.local/bin
 # Install Ruby Gems to ~/.gems
 export GEM_HOME="$HOME/.gems"
 export PATH="$HOME/.gems/bin:$PATH"
+
+source $HOME/.bash_alias
+source $HOME/.bash_funcs
+export NODEJS_HOME=/usr/local/lib/nodejs/node-v10.15.0/bin
+export PATH=:/home/linta/.gems/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/home/linta/.local/bin

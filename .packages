@@ -10,7 +10,7 @@ ranger
 compton
 tmux
 rxvt-unicode-256color
-texlive-full
+# texlive-full
 pandoc
 groff
 notify-osd
@@ -25,7 +25,7 @@ pulseaudio
 samba
 # qemu-kvm
 # libvirt-bin
-# virt-manager
+virt-manager
 sshfs
 zenity
 rdesktop
@@ -39,3 +39,4 @@ libnotify-bin
 xsel
 xautolock
 xtrlock
+thunar

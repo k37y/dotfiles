@@ -77,3 +77,12 @@ while true; do youtube-dl -f 18 -a /home/kiosk/Videos/download -o "/home/kiosk/V
 function play {
 mpv $(youtube-dl -v -g "$1")
 }
+
+function loop {
+while true;
+do $1;
+if [[ $? == 0 ]]; then
+break;
+fi
+done
+}

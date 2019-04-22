@@ -21,10 +21,10 @@ own_window_colour 000000
 border_inner_margin 0
 border_outer_margin 0
 
-minimum_size 200 100
-maximum_width 100
+minimum_size 150 200
+maximum_width 150
 alignment top_left
-gap_x 1230
+gap_x 1210
 gap_y 300
 
 draw_shades no

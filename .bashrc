@@ -180,6 +180,8 @@ if [[ $TERM == linux ]]; then
 	startx
 fi
 
+export TERM="xterm-256color"
+
 PATH=$PATH:$HOME/.local/bin
 
 # Install Ruby Gems to ~/.gems

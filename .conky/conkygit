@@ -21,8 +21,8 @@ own_window_colour 000000
 border_inner_margin 0
 border_outer_margin 0
 
-minimum_size 1200 100
-maximum_width 1200
+minimum_size 200 200
+maximum_width 200
 alignment top_left
 gap_x 40
 gap_y 540

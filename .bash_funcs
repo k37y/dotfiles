@@ -86,3 +86,9 @@ break;
 fi
 done
 }
+
+# bypass is a function
+bypass () 
+{ 
+    tmux new -d -s $1 "ssh $1"
+}

@@ -179,8 +179,8 @@ mode "resize" {
 bindsym $mod+r mode "resize"
 
 #gnome-screenshot
-bindsym --release Print exec gnome-screenshot
-bindsym --release $mod+Print exec gnome-screenshot -a
+bindsym --release $mod+Print exec gnome-screenshot
+bindsym --release Print exec gnome-screenshot -i
 bindsym --release Shift+Print exec gnome-screenshot -w
 #Volume Control
 bindsym --release $mod+Up exec --no-startup-id pactl set-sink-volume 0 +5%

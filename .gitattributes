@@ -1,3 +1,4 @@
+.gitattributes !filter !diff
 .ssh/config filter=git-crypt diff=git-crypt
 .ssh/id_rsa filter=git-crypt diff=git-crypt
 .ssh/id_rsa.pub filter=git-crypt diff=git-crypt

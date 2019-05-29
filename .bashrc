@@ -117,78 +117,22 @@ if [ -f $HOME/.bash_funcs ]; then
 .  $HOME/.bash_funcs
 fi
 
-imgur() {
-    for i in "$@"; do
-        curl -# -F "image"=@"$i" -F "key"="9dfcc406bfc917ea99792a541a8ca3c0527bfb0a" imgur.com/api/upload.xml|\
-        grep -Eo '<[a-z_]+>http[^<]+'|sed 's/^<.\|_./\U&/g;s/_/ /;s/<\(.*\)>/\x1B[0;34m\1:\x1B[0m /'
-    done
-}
-
-# history auto completion
-
+# Bash-complete history commands
 if [[ $- == *i* ]]
 then
     bind '"\e[A": history-search-backward'
     bind '"\e[B": history-search-forward'
 fi
 
-# hibernate
-
-alias hibernate='nmcli nm enable false && sudo pm-hibernate'
-
-# shutdown
-
-alias shutdown='sudo shutdown -P now'
-
-# style
-
+# Style prompt
 #PS1='${debian_chroot:+($debian_chroot)}┌─[$(tput bold)$(tput setaf 1)\t$(tput sgr 0)]─[$(tput bold)$(tput setaf 1)\$$(tput sgr 0)]─[$(tput bold)$(tput setaf 1)\w$(tput sgr 0)]─[$(tput bold)$(tput setaf 1)\u$(tput sgr 0)]\n└─────[\!] '
 
-#PS1='${debian_chroot:+($debian_chroot)}┌─[\[\033[01;32m\]\t\[\033[00m\]]─[\[\033[01;32m\]\$\[\033[00m\]]─[\[\033[01;32m\]\w\[\033[00m\]]─[\[\033[01;32m\]\u\[\033[00m\]]\n\[\033[00m\]└─────[\[\033[01;32m\]\!\[\033[00m\]] '
+PS1='${debian_chroot:+($debian_chroot)}┌─[\[\033[01;32m\]\t\[\033[00m\]]─[\[\033[01;32m\]\$\[\033[00m\]]─[\[\033[01;32m\]\w\[\033[00m\]]─[\[\033[01;32m\]\u\[\033[00m\]]\n\[\033[00m\]└─────[\[\033[01;32m\]\!\[\033[00m\]] '
 
-#date;echo "What can I help you with, kevy?";
-
-
-# erase duplicate
-export HISTCONTROL=ignoreboth:erasedups
-
-#start
-alias on='sudo service lightdm start'
-alias off='sudo service lightdm stop'
-
-#Columns
-COLUMNS=250
-
-#alarm
-alias beep='paplay /usr/share/sounds/freedesktop/stereo/alarm-clock-elapsed.oga'
-
-if [ -z "$DISPLAY" ]; then
-    startx
-fi
-
-#connect to wireless
-alias wpa-connect='sudo wpa_supplicant -B -i wlp6s0 -c /etc/wpa_supplicant/wpa_supplicant.conf -D wext; sudo dhclient wlp6s0'
-
-#github
-alias site-update='echo "<footer><span> $(date "+%T ∙ %d %B %Y") </span></footer>" > $HOME/GitHub/kevydotvinu.github.io/_includes/footer.html; git add .; git commit -m "updated site"; git push -u origin master'
-
-if [ -e ~/.bash_profile ]; then
-	source ~/.bash_profile
-fi
-
-if [[ $TERM == linux ]]; then
-	startx
-fi
-
-export TERM="xterm-256color"
-
+# Additional PATH
 PATH=$PATH:$HOME/.local/bin
 
-# Install Ruby Gems to ~/.gems
-export GEM_HOME="$HOME/.gems"
-export PATH="$HOME/.gems/bin:$PATH"
-
+# Source needed files
 source $HOME/.bash_alias
 source $HOME/.bash_funcs
-export NODEJS_HOME=/usr/local/lib/nodejs/node-v10.15.0/bin
-export PATH=:/home/linta/.gems/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/home/linta/.local/bin
+source $HOME/.bash_exports

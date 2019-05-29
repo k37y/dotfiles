@@ -42,4 +42,4 @@ default_color FFFFFF
 
 TEXT
 #${voffset 0}
-${goto 0}${color A9A9A9}${font Ubuntu:size=6}${execi 1 cat $HOME/.todo}
+${goto 0}${color A9A9A9}${font Default:size=6}${execi 1 cat $HOME/.todo}

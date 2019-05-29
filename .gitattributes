@@ -5,4 +5,3 @@
 .ssh/authorized_keys filter=git-crypt diff=git-crypt
 .dnsmasq.d/dhcp.conf filter=git-crypt diff=git-crypt
 .dnsmasq.d/dns.conf filter=git-crypt diff=git-crypt
-.hosts filter=git-crypt diff=git-crypt

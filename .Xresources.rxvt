@@ -12,8 +12,8 @@ URxvt.scrollBar: false
 URxvt*internalBorder: 25
 URxvt*externalBorder: 1
 URxvt*cursorBlink: true
-URxvt*transparent: false
-URxvt*shading: 1
+URxvt*transparent: true
+URxvt*shading: 10
 
 
 !BLK Cursor

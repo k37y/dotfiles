@@ -40,4 +40,12 @@ let g:instant_markdown_autostart = 0
 "set laststatus=2
 "set t_Co=256
 "set showtabline=2
-"set noshowmode 
+"set noshowmode
+
+"latex
+map C :!xelatex % <CR><CR>
+map S :!zathura $(echo % \| sed 's/tex$/pdf/') & disown <CR><CR>
+
+"linefold
+autocmd BufWinleave *.* mkview
+autocmd BufWinEnter *.* silent loadview

@@ -22,6 +22,7 @@ call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'christoomey/vim-tmux-runner'
 Plugin 'scrooloose/nerdtree'
+Plugin 'Yggdroot/indentLine'
 call vundle#end()
 filetype plugin indent on
 
@@ -49,3 +50,6 @@ map S :!zathura $(echo % \| sed 's/tex$/pdf/') & disown <CR><CR>
 "linefold
 autocmd BufWinleave *.* mkview
 autocmd BufWinEnter *.* silent loadview
+
+"ansible
+map P :!ansible-playbook /home/linta/Public/Ansible/Ansible/hdfc.yml <CR>

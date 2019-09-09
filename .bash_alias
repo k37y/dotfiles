@@ -1,4 +1,3 @@
-
 alias beep='paplay /usr/share/sounds/freedesktop/stereo/alarm-clock-elapsed.oga'
 alias wpa-connect='sudo wpa_supplicant -B -i wlp6s0 -c /etc/wpa_supplicant/wpa_supplicant.conf -D wext 2>/dev/null; sudo dhclient wlp6s0'
 alias site-update='echo "<footer><span> $(date "+%T ∙ %d %B %Y") </span></footer>" > $HOME/GitHub/kevydotvinu.github.io/_includes/footer.html; git add .; git commit -m "updated site"; git push -u origin master'

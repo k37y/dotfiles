@@ -22,7 +22,10 @@ call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'christoomey/vim-tmux-runner'
 Plugin 'scrooloose/nerdtree'
-Plugin 'Yggdroot/indentLine'
+Plugin 'lervag/vimtex'
+Plugin 'SirVer/ultisnips'
+Plugin 'honza/vim-snippets'
+Plugin 'xuhdev/vim-latex-live-preview'
 call vundle#end()
 filetype plugin indent on
 
@@ -32,24 +35,42 @@ vmap <F7> : VtrSendLinesToRunner <CR>
 
 "nerdtree
 map <C-n> :NERDTreeToggle<CR>
+let NERDTreeShowHidden=1
+
+"tab
+map  <C-l> :tabn<CR>
+map  <C-h> :tabp<CR>
+map  <C-b> :tabnew<CR>
 
 "susan/vim-instant-markdown
 let g:instant_markdown_autostart = 0
 
 "powerline
-"set rtp+=$HOME/.local/lib/python2.7/site-packages/powerline/bindings/vim/
+"set rtp+=$HOME/.local/lib/python3.5/site-packages/powerline/bindings/vim/
 "set laststatus=2
 "set t_Co=256
 "set showtabline=2
-"set noshowmode
+"set noshowmode 
 
 "latex
 map C :!xelatex % <CR><CR>
 map S :!zathura $(echo % \| sed 's/tex$/pdf/') & disown <CR><CR>
+
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<c-b>"
+let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+let g:UltiSnipsEditSplit="vertical"
+let g:UltiSnipsSnippetDirectories=[$HOME.'/.vim/UltiSnips']
+
+let g:tex_flavor='latex'
+let g:vimtex_view_method='zathura'
+let g:vimtex_quickfix_mode=0
+set conceallevel=1
+let g:tex_conceal='abdmg'
 
 "linefold
 autocmd BufWinleave *.* mkview
 autocmd BufWinEnter *.* silent loadview
 
 "ansible
-map P :!ansible-playbook /home/linta/Public/Ansible/Ansible/hdfc.yml <CR>
+"map P :!ansible-playbook /home/linta/Public/Ansible/Ansible/hdfc.yml <CR>

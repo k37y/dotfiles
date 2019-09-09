@@ -1,0 +1,141 @@
+snippet Lbox "Box"
+`!p snip.rv = '┌' + '─' * (len(t[1]) + 2) + '┐'`
+│ $1 │
+`!p snip.rv = '└' + '─' * (len(t[1]) + 2) + '┘'`
+$0
+endsnippet
+
+snippet Ls "LaTex Script"
+\begin{lstlisting}[language=bash]
+$1
+\end{lstlisting}
+\bigbreak
+$0
+endsnippet
+
+snippet Lf "LaTex Figure"
+\begin{figure}[H]
+\centering
+\includegraphics[trim = 0mm 0mm 100mm 0mm, clip, width=1\textwidth]{$1}
+\caption{$2}
+\end{figure}
+$0
+endsnippet
+
+snippet Lc "LaTex Command"
+\lstinline{$1} $0
+endsnippet
+
+snippet Lr "LaTex Reference"
+\section{References}
+
+\quad $1: \quad \underline{\href{url}{$2}}
+$0
+endsnippet
+
+snippet Lclass "LaTex Tech Class"
+\documentclass[a4paper,12pt,titlepage]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{geometry}
+\usepackage{fontspec}
+\usepackage{fancyhdr}
+\usepackage[english]{babel}
+\usepackage{array}
+\usepackage{xcolor}
+\usepackage{amsmath}
+\usepackage{longtable}
+\usepackage{float}
+
+\usepackage{listings}
+\lstset{
+basicstyle=\ttfamily,
+showstringspaces=false,
+commentstyle=\color{blue},
+keywordstyle=\color{red},
+columns=fullflexible,
+breaklines=true,
+postbreak=\mbox{\textcolor{red}{$\hookrightarrow$}\space},
+texcl=true
+}
+
+\usepackage{hyperref}
+\hypersetup{
+colorlinks,
+citecolor=black,
+filecolor=black,
+linkcolor=black,
+urlcolor=black
+}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[LE,RO]{Ashtech Infotech Pvt Ltd}
+\fancyhead[RE,LO]{Knowledge Base}
+\fancyfoot[CE,CO]{\thepage}
+\setmainfont{Ubuntu}
+\newgeometry{vmargin={30mm}, hmargin={30mm}}
+\graphicspath{ {/tmp/} }
+$0
+endsnippet
+
+snippet Lintro "LaTex tech Introduction"
+\title{Knowledge Base}
+\author{Ashtech Infotech Pvt Ltd\thanks{ashinfo.com}}
+\date{`date +'%d %B %Y'`}
+
+\begin{document}
+
+\maketitle
+
+\tableofcontents
+
+\section*{Acknowledgement}
+This documentation was produced by the following members of Ashtech Infotech team:
+
+Engineering: Vinu K
+
+Additional contributors: Benedict Patrick, Ashish Chawan and Jitendra More
+
+\section*{Feedback}
+We encourage readers of this publication to provide feedback on the quality and usefulness of this information by sending an email to support@ashinfo.com.
+
+\section*{Audience}
+This paper is intended for system administrator who are managing OL environments.
+
+\section{Applies To}
+\begin{itemize}
+\item $1
+\end{itemize}
+
+\section{Goal}
+$2
+
+\section{Solution}
+Follow below steps:
+
+\subsection{$3}
+$0
+
+\end{document}
+endsnippet
+
+snippet Li "LaTex Indent"
+\noindent $1
+endsnippet
+
+snippet Litem "LaTex Itemize"
+\begin{itemize}
+\item $1
+\end{itemize}
+$0
+endsnippet
+
+snippet Lsub "LaTex subsection"
+\subsection{$1}
+$0
+endsnippet
+
+snippet Lsubsub "LaTex subsubsection"
+\subsubsection{$1}
+$0
+endsnippet

@@ -12,7 +12,7 @@ URxvt.scrollBar: false
 URxvt*internalBorder: 25
 URxvt*externalBorder: 1
 URxvt*cursorBlink: true
-URxvt*transparent: true
+URxvt*transparent: false
 URxvt*shading: 10
 
 
@@ -50,7 +50,7 @@ URxvt*shading: 10
 #define _cursorColor   #e3bf21
 !Extra
 #define _white #ffffff
-#define _black #181818
+#define _black #272727
 #define _coffee #6F4E37
 #define _ubuntu #E95420
 

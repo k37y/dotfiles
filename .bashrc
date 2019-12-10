@@ -135,10 +135,9 @@ fi
 PS1='${debian_chroot:+($debian_chroot)}┌─[\[\033[01;32m\]\t\[\033[00m\]]─[\[\033[01;32m\]\$\[\033[00m\]]─[\[\033[01;32m\]\w\[\033[00m\]]─[\[\033[01;32m\]\u\[\033[00m\]]\n\[\033[00m\]└─────[\[\033[01;32m\]\!\[\033[00m\]] '
 
 # Additional PATH
-PATH=$PATH:$HOME/.local/bin
+export PATH=$PATH:$HOME/.local/bin:/usr/lib/jvm/jdk1.8.0_231/bin/
 
 # Source needed files
 source $HOME/.bash_alias
 source $HOME/.bash_funcs
 source $HOME/.bash_exports
-

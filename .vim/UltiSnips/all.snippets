@@ -94,7 +94,7 @@ This documentation was produced by the following members of Ashtech Infotech tea
 
 Engineering: Vinu K
 
-Additional contributors: Benedict Patrick, Ashish Chawan and Jitendra More
+Additional contributors: Benedict Patrick and Ashish Chawan
 
 \section*{Feedback}
 We encourage readers of this publication to provide feedback on the quality and usefulness of this information by sending an email to support@ashinfo.com.
@@ -138,4 +138,18 @@ endsnippet
 snippet Lsubsub "LaTex subsubsection"
 \subsubsection{$1}
 $0
+endsnippet
+
+snippet Ldescription "LaTex itemized description"
+\begin{description}
+\item[$1] \hfill \\
+$2
+\item[$3] \hfill \\
+$4
+\end{description}
+$0
+endsnippet
+
+snippet Lcolor "LaTex text color"
+\textcolor{red$1}{$2}$0
 endsnippet

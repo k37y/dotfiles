@@ -153,3 +153,102 @@ endsnippet
 snippet Lcolor "LaTex text color"
 \textcolor{red$1}{$2}$0
 endsnippet
+
+snippet blogSkel "Blog Post Skelton"
+---
+title:
+subtitle:
+image: /images/image.jpg
+layout: post
+tags: [ PXE, Linux, Network, Ubuntu, Windows ]
+---
+
+* toc
+{:toc}
+
+This is an introduction!
+
+## H1
+
+
+### H2
+
+
+#### H3
+
+Look my [previous post](https://www.gnulinuxmate.com/2018/09/10/Linux-PXE-Server-As-Proxy DHCP-In-Windows-DHCP-Network/).
+$0
+endsnippet
+
+snippet blogScript "Blog Post Script"
+```bash
+$0
+```
+endsnippet
+
+snippet blogCommand "Blog Post Command"
+`$0`
+endsnippet
+
+snippet blogSingleTable "Blog Post Table"
+| Title        |
+|:-------------|
+| One          |
+| Two          |
+| Three        |
+| Four         |
+| Five         |
+$0
+endsnippet
+
+snippet blogNote "Blog Post Note"
+**Note:** This is a note.
+{: .notice}
+$0
+endsnippet
+
+snippet blogDoubleTable "Blog Post Table"
+| Title1         | Title2       |
+| :------------: | :----------: |
+| One            | One          |
+| Two            | Two          |
+| Three          | Three        |
+| Four           | Four         |
+| Five           | Five         |
+| Six            | Six          |
+$0
+endsnippet
+
+snippet blogTerminal "Blog Post Terminal"
+<html>
+<head>
+<link rel="stylesheet" type="text/css" href="/assets/css/asciinema-player.css" />
+</head>
+<body>
+<asciinema-player src="/cast/openstack.cast" speed="1" theme="asciinema" poster="data:text/plain,\e[1;37mHow to \e[1;33mlaunch \e[1;37man instance" cols="110" rows="22"></asciinema-player>
+<script src="/assets/js/asciinema-player.js"></script>
+</body>
+</html>
+$0
+endsnippet
+
+snippet blogImage "Blog Post Image"
+![caption](/images/image.png)
+$0
+endsnippet
+
+snippet blogQuote "Blog Post Quote"
+> This is a highlighting point.
+$0
+endsnippet
+
+snippet blogButton "Blog Post Button"
+[One](#){: .btn .btn_success} -> [Two](#){: .btn .btn_success} -> [Three](#){: .btn .btn_success}
+$0
+endsnippet
+
+snippet blogVideo "Blog Post Video"
+[![watch](/images/play-button.png){:.centre-image}](https://player.vimeo.com/video/256223442)
+<p><a href="https://vimeo.com/256223442">ODA_X6-2S_deployment</a> from <a href="https://vimeo.com/user81321720">linuxmate</a> on <a href="https://vimeo.com">Vimeo</a>.</p>
+$0
+endsnippet

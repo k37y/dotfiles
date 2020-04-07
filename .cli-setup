@@ -1,3 +1,5 @@
+dconf reset -f /org/gnome/terminal/
+dconf load /org/gnome/terminal/ < .gnome-terminal.dconf
 cp -ar .vim* .tmux.conf .bash* .zshrc .fonts $HOME/
 sudo apt install zsh xclip || sudo yum install zsh xclip
 git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm

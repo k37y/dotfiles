@@ -2,6 +2,5 @@ export HISTCONTROL=ignoreboth:erasedups
 export TERM="xterm-256color"
 export HOSTALIASES=$HOME/.hosts
 export GEM_HOME="$HOME/.gems"
-export PATH="$HOME/.gems/bin:$PATH"
 export NODEJS_HOME=/usr/local/lib/nodejs/node-v10.15.0/bin
-export PATH=:/home/linta/.gems/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/home/linta/.local/bin
+export PATH=$PATH:$HOME/.gems/bin:$HOME/.local/bin:$HOME/.crc/bin

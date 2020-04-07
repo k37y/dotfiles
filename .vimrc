@@ -2,9 +2,12 @@
 syntax enable
 set number
 set rnu
+set undodir=~/.vim/undodir
 
 "colors
-colorscheme lucario
+"colorscheme lucario
+colorscheme gruvbox
+set background=dark
 
 "write-tools
 map <F11> : setlocal nospell <CR>
@@ -26,6 +29,11 @@ Plugin 'lervag/vimtex'
 Plugin 'SirVer/ultisnips'
 Plugin 'honza/vim-snippets'
 Plugin 'xuhdev/vim-latex-live-preview'
+Plugin 'junegunn/fzf'
+Plugin 'morhetz/gruvbox'
+Plugin 'ycm-core/YouCompleteMe'
+Plugin 'tpope/vim-fugitive'
+Plugin 'powerline/powerline', {'rtp': 'powerline/bindings/vim/'}
 call vundle#end()
 filetype plugin indent on
 
@@ -46,11 +54,10 @@ map  <C-b> :tabnew<CR>
 let g:instant_markdown_autostart = 0
 
 "powerline
-"set rtp+=$HOME/.local/lib/python3.5/site-packages/powerline/bindings/vim/
-"set laststatus=2
-"set t_Co=256
-"set showtabline=2
-"set noshowmode 
+set laststatus=2
+set t_Co=256
+set showtabline=2
+set noshowmode 
 
 "latex
 map C :!xelatex % <CR><CR>

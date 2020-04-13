@@ -78,6 +78,7 @@ source $ZSH/oh-my-zsh.sh
 [ -f $HOME/.bash_alias ] && source $HOME/.bash_alias
 [ -f $HOME/.bash_exports ] && source $HOME/.bash_exports
 [ -f $HOME/.fzf.zsh ] && source $HOME/.fzf.zsh
+[ -f $HOME/.xmodmap ] && xmodmap $HOME/.xmodmap
 
 # export MANPATH="/usr/local/man:$MANPATH"
 

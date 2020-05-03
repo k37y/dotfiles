@@ -3,6 +3,7 @@ syntax enable
 set number
 set rnu
 set undodir=~/.vim/undodir
+set undofile
 
 "colors
 "colorscheme lucario

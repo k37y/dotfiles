@@ -12,6 +12,7 @@ fi
 #install packages
 read -p "Do you want to install packages [y/N]? " -r
 if [[ $REPLY =~ ^[Yy]$ ]]; then
+	sudo sed -i 's/http:\/\/archive.ubuntu.com\/ubuntu\//http:\/\/mirrors.aliyun.com\/ubuntu\//' /etc/apt/sources.list
 	sudo apt update
 	sudo apt install -y $(grep -vE "^\s*#" $HOME/.packages | xargs)
 else

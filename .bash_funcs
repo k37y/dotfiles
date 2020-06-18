@@ -92,3 +92,8 @@ bypass ()
 { 
     tmux new -d -s $1 "ssh $1"
 }
+
+function paste() {
+    local file=${1:-/dev/stdin}
+    curl --data-binary @${file} https://paste.rs
+}

@@ -2,7 +2,8 @@ dconf reset -f /org/gnome/terminal/
 dconf load /org/gnome/terminal/ < .gnome-terminal.dconf
 changed mono font in gnome tweak
 add zsh in gnome custom command preference
-cp -ar .vim* .tmux.conf .bash* .zshrc .fonts $HOME/
+cp -avr .vim .fonts $HOME/
+ln -sfv $(pwd)/{.zshrc,.bash*,.tmux.conf,.vimrc} $HOME/
 sudo apt install zsh xclip || sudo yum install zsh xclip
 git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim

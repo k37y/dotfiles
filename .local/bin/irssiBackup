@@ -1,0 +1,5 @@
+#!/bin/bash
+SRC=/home/Guest/.irssi
+DST=/home/Guest/Backups
+DATE=`date +%d-%h-%Y`
+/usr/bin/tar cfvP ${DST}/irssi-${DATE}.tar ${SRC} 1>&2 > /dev/null

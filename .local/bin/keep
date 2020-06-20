@@ -1,0 +1,17 @@
+#!/bin/bash
+
+OPERATION=${1}
+# [[ "${#}" != 1 ]] || OPERATION="help"
+
+case $OPERATION in
+	save)
+		echo "$(date +%d-%h-%Y) | "${2}"" >> $HOME/.keep/commands
+		;;
+	list)
+		cat $HOME/.keep/commands
+		;;
+	*)
+		echo "USAGE: keep <save|list> <command>"
+		echo "EXAMPLE: keep save "cat /etc/os-release""
+		;;
+esac

@@ -1,11 +1,14 @@
 dconf reset -f /org/gnome/terminal/
 dconf load /org/gnome/terminal/ < .gnome-terminal.dconf
+changed mono font in gnome tweak
+add zsh in gnome custom command preference
 cp -ar .vim* .tmux.conf .bash* .zshrc .fonts $HOME/
 sudo apt install zsh xclip || sudo yum install zsh xclip
 git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 vim +PluginInstall +qall
 sh -c "$(wget -O- https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+git clone https://github.com/zsh-users/zsh-autosuggestions.git $ZSH_CUSTOM/plugins/zsh-autosuggestions
 git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
 ~/.fzf/install
 cp ~/.vim/bundle/gruvbox/colors/gruvbox.vim ~/.vim/colors/

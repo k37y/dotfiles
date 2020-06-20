@@ -1,0 +1,6 @@
+xmodmap -e "keycode 96 = KP_Enter"
+xmodmap -e "keycode 71 = c"
+xmodmap -e "keycode 72 = v"
+xmodmap -e "keycode 75 = m"
+xmodmap -e "keycode 76 = comma"
+xmodmap -e "keycode 95 = period"

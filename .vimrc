@@ -4,6 +4,7 @@ set number
 set rnu
 set undodir=~/.vim/undodir
 set undofile
+set clipboard=unnamedplus
 
 "colors
 "colorscheme lucario

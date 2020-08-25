@@ -27,10 +27,10 @@ call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'christoomey/vim-tmux-runner'
 Plugin 'scrooloose/nerdtree'
-Plugin 'lervag/vimtex'
+"Plugin 'lervag/vimtex'
 Plugin 'SirVer/ultisnips'
 Plugin 'honza/vim-snippets'
-Plugin 'xuhdev/vim-latex-live-preview'
+"Plugin 'xuhdev/vim-latex-live-preview'
 Plugin 'junegunn/fzf'
 Plugin 'morhetz/gruvbox'
 Plugin 'ycm-core/YouCompleteMe'
@@ -83,3 +83,6 @@ autocmd BufWinEnter *.* silent loadview
 
 "ansible
 "map P :!ansible-playbook /home/linta/Public/Ansible/Ansible/hdfc.yml <CR>
+
+"yaml
+autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab

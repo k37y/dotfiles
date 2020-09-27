@@ -86,6 +86,15 @@ export LANG=en_US.UTF-8
 export LC_ALL=en_US.UTF-8
 export LANGUAGE=en_US.UTF-8
 export KUBECONFIG=$HOME/.kube/config
+export GOPATH=$HOME/Go
+export GOPATH=$GOPATH:$HOME/Code
+export PATH=$PATH:$GOPATH/bin
+export PATH=$PATH:/usr/local/go/bin
+
+# GPG SSH
+gpg-agent --quiet --enable-ssh-support --daemon >/dev/null 2>&1
+export SSH_AUTH_SOCK="$(gpgconf --list-dirs agent-ssh-socket)"
+export GPG_TTY=$(tty)
 
 # Preferred editor for local and remote sessions
 # if [[ -n $SSH_CONNECTION ]]; then

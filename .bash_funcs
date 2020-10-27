@@ -97,3 +97,11 @@ function paste.rs() {
     local file=${1:-/dev/stdin}
     curl --data-binary @${file} https://paste.rs
 }
+
+function alpine() {
+sudo podman run --rm -it --net host --security-opt label=disable --name=alpine docker.io/alpine
+}
+
+function ubuntu() {
+sudo podman run --rm -it --net host --security-opt label=disable --name=ubuntu docker.io/ubuntu
+}

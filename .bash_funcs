@@ -99,9 +99,9 @@ function paste.rs() {
 }
 
 function alpine() {
-sudo podman run --rm -it --net host --security-opt label=disable --name=alpine docker.io/alpine
+sudo podman run --rm --interactive --tty --net host --security-opt label=disable --name=alpine docker.io/alpine
 }
 
 function ubuntu() {
-sudo podman run --rm -it --net host --security-opt label=disable --name=ubuntu docker.io/ubuntu
+sudo podman run --rm --interactive --tty --net host --security-opt label=disable --name=ubuntu docker.io/ubuntu
 }

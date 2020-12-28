@@ -105,3 +105,11 @@ sudo podman run --rm --interactive --tty --net host --security-opt label=disable
 function ubuntu() {
 sudo podman run --rm --interactive --tty --net host --security-opt label=disable --name=ubuntu docker.io/ubuntu
 }
+
+function archlinux() {
+sudo podman run --rm --interactive --tty --net host --security-opt label=disable --name=archlinux docker.io/archlinux
+}
+
+function vpnconnect() {
+otpc | tee /tmp/otpc && echo vpn.secrets.password:$(cat ~/.local/etc/passwd | base64 -d)$(cat /tmp/otpc | grep HO | awk '{print $3}') > /tmp/passfile && nmcli connection up Pune\ \(PNQ2\) passwd-file /tmp/passfile && rm -vf /tmp/passfile /tmp/otpc
+}

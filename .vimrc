@@ -36,6 +36,7 @@ Plugin 'morhetz/gruvbox'
 Plugin 'ycm-core/YouCompleteMe'
 Plugin 'tpope/vim-fugitive'
 Plugin 'powerline/powerline', {'rtp': 'powerline/bindings/vim/'}
+Plugin 'fatih/vim-go'
 call vundle#end()
 filetype plugin indent on
 

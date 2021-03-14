@@ -86,10 +86,11 @@ export LANG=en_US.UTF-8
 export LC_ALL=en_US.UTF-8
 export LANGUAGE=en_US.UTF-8
 export KUBECONFIG=$HOME/.kube/config
+export GOROOT=/usr/local/go
+export PATH=$PATH:$GOROOT/bin
 export GOPATH=$HOME/Go
-export GOPATH=$GOPATH:$HOME/Code
 export PATH=$PATH:$GOPATH/bin
-export PATH=$PATH:/usr/local/go/bin
+export GOPATH=$GOPATH:$HOME/Code
 
 # GPG SSH
 gpg-agent --quiet --enable-ssh-support --daemon >/dev/null 2>&1

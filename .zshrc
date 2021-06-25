@@ -91,6 +91,7 @@ export PATH=$PATH:$GOROOT/bin
 export GOPATH=$HOME/Go
 export PATH=$PATH:$GOPATH/bin
 export GOPATH=$GOPATH:$HOME/Code
+export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
 
 # GPG SSH
 gpg-agent --quiet --enable-ssh-support --daemon >/dev/null 2>&1

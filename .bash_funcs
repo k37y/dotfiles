@@ -113,3 +113,7 @@ sudo podman run --rm --interactive --tty --net host --security-opt label=disable
 function vpnconnect() {
 otpc | tee /tmp/otpc && echo vpn.secrets.password:$(cat ~/.local/etc/passwd | base64 -d)$(cat /tmp/otpc | grep HO | awk '{print $3}') > /tmp/passfile && nmcli connection up Pune\ \(PNQ2\) passwd-file /tmp/passfile && rm -vf /tmp/passfile /tmp/otpc
 }
+
+function termuxSend() {
+scp -P 8022 "$1" user@192.168.73.254:/storage/emulated/0/Termux/
+}

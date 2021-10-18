@@ -37,6 +37,7 @@ Plugin 'morhetz/gruvbox'
 Plugin 'tpope/vim-fugitive'
 Plugin 'powerline/powerline', {'rtp': 'powerline/bindings/vim/'}
 Plugin 'fatih/vim-go'
+Plugin 'mtdl9/vim-log-highlighting'
 call vundle#end()
 filetype plugin indent on
 
@@ -66,11 +67,12 @@ set noshowmode
 map C :!xelatex % <CR><CR>
 map S :!zathura $(echo % \| sed 's/tex$/pdf/') & disown <CR><CR>
 
-"let g:UltiSnipsExpandTrigger="<tab>"
-"let g:UltiSnipsJumpForwardTrigger="<c-b>"
-"let g:UltiSnipsJumpBackwardTrigger="<c-z>"
-"let g:UltiSnipsEditSplit="vertical"
-"let g:UltiSnipsSnippetDirectories=[$HOME.'/.vim/UltiSnips']
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<c-b>"
+let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+let g:UltiSnipsEditSplit="vertical"
+let g:UltiSnipsSnippetDirectories=[$HOME.'/.vim/UltiSnips']
+let g:UltiSnipsUsePythonVersion = 3
 
 let g:tex_flavor='latex'
 let g:vimtex_view_method='zathura'
@@ -91,3 +93,6 @@ autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
 "vim-go
 let g:go_def_mode='gopls'
 let g:go_info_mode='gopls'
+
+"fzf
+set rtp+=~/.fzf

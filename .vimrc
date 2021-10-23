@@ -38,6 +38,8 @@ Plugin 'tpope/vim-fugitive'
 Plugin 'powerline/powerline', {'rtp': 'powerline/bindings/vim/'}
 Plugin 'fatih/vim-go'
 Plugin 'mtdl9/vim-log-highlighting'
+Plugin 'Yggdroot/indentLine'
+Plugin 'dense-analysis/ale'
 call vundle#end()
 filetype plugin indent on
 

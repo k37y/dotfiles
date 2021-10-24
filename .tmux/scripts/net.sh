@@ -11,5 +11,9 @@ do
         RBPS=`expr $R2 - $R1`
         TKBPS=`expr $TBPS / 1024`
         RKBPS=`expr $RBPS / 1024`
-	echo "↑ $(echo $TKBPS | awk '{printf "%0004d\n", $1}') KB/s ↓ $( echo $RKBPS | awk '{printf "%0004d\n", $1}') KB/s"
+	if [[ $1 == upload ]]; then
+		echo "↑ $(echo $TKBPS | awk '{printf "%0004d\n", $1}') KB/s"
+	elif [[ $1 == download ]]; then
+		echo "↓ $( echo $RKBPS | awk '{printf "%0004d\n", $1}') KB/s"
+	fi
 done

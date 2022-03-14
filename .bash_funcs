@@ -117,3 +117,24 @@ otpc | tee /tmp/otpc && echo vpn.secrets.password:$(cat ~/.local/etc/passwd | ba
 function termuxSend() {
 scp -P 8022 "$1" user@192.168.73.254:/storage/emulated/0/Termux/
 }
+
+function ofzf() {
+PROJECT=$(oc get project | sed 1d | awk '{print $1}' | fzf)
+POD=$(oc get pods -o wide -o jsonpath='{range .items[*]}{.metadata.name} {.spec.nodeName}{"\n"}' -n $PROJECT | sed 1d | awk '{print $1"   "$2}' | fzf | awk '{print $1}')
+CONTAINER=$(oc get pod $POD -n $PROJECT -o jsonpath='{range .spec.containers[*]}{.name}{"\n"}{end}' | fzf)
+
+if [[ $1 == pod ]]; then
+
+fi
+if [[ $1 == "logs" ]] ; then
+echo "Showing logs of $POD ..."
+oc logs $POD -c $CONTAINER -n $PROJECT | less
+fi
+}
+
+function clean-container-images {
+sudo podman rmi $(sudo podman images -a | grep -v 'localhost/kevydotvinu' | awk 'NR>1 {print $3}') -f
+podman rmi $(sudo podman images -a | grep -v 'localhost/kevydotvinu' | awk 'NR>1 {print $3}') -f
+sudo podman rm $(sudo podman ps -a | awk 'NR>1 {print $1}')
+podman rm $(sudo podman ps -a | awk 'NR>1 {print $1}')
+}

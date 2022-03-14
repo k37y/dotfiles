@@ -40,6 +40,7 @@ Plugin 'fatih/vim-go'
 Plugin 'mtdl9/vim-log-highlighting'
 Plugin 'Yggdroot/indentLine'
 Plugin 'dense-analysis/ale'
+Plugin 'ryanoasis/vim-devicons'
 call vundle#end()
 filetype plugin indent on
 

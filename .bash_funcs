@@ -111,11 +111,31 @@ sudo podman run --rm --interactive --tty --net host --security-opt label=disable
 }
 
 function vpnconnect() {
-otpc | tee /tmp/otpc && echo vpn.secrets.password:$(cat ~/.local/etc/passwd | base64 -d)$(cat /tmp/otpc | grep HO | awk '{print $3}') > /tmp/passfile && nmcli connection up Pune\ \(PNQ2\) passwd-file /tmp/passfile && rm -vf /tmp/passfile /tmp/otpc
+otpc | tee /tmp/otpc && echo vpn.secrets.password:$(pass redhat.com/vpn | sed -n 1p)$(cat /tmp/otpc | grep HO | awk '{print $3}') > /tmp/passfile && nmcli connection up Pune\ \(PNQ2\) passwd-file /tmp/passfile && rm -vf /tmp/passfile /tmp/otpc
 }
 
 function termuxSend() {
-scp -P 8022 "$1" user@192.168.73.254:/storage/emulated/0/Termux/
+	echo "INFO: Open termux Android application and run:"
+	echo "INFO: ip a s \$(ip r | grep default | awk '{print \$5}') | grep inet | awk '{print \$2}' | cut -d'/' -f1"
+	echo "INFO: sshd"
+        read -p "Enter the IP from above command: " -r
+        if [[ $REPLY =~ ^[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+		IP=${REPLY}
+        else
+            echo -e "\nInvalid IP address."
+            exit 1
+        fi
+	read -p "Send file ${1} [Y/n]? " -r
+        if [[ $REPLY =~ ^[Yy]$ ]]; then
+	echo -e "Sending file ..."
+        scp -P 8022 "$1" user@${IP}:/storage/emulated/0/Termux/
+	echo "${1} Sent!"
+	echo "Check Termux directory inside internal storage"
+	echo "You can run 'pkill sshd' in termux now"
+        else
+            echo -e "\nAborted"
+            exit 1
+        fi
 }
 
 function ofzf() {
@@ -123,8 +143,8 @@ PROJECT=$(oc get project | sed 1d | awk '{print $1}' | fzf)
 POD=$(oc get pods -o wide -o jsonpath='{range .items[*]}{.metadata.name} {.spec.nodeName}{"\n"}' -n $PROJECT | sed 1d | awk '{print $1"   "$2}' | fzf | awk '{print $1}')
 CONTAINER=$(oc get pod $POD -n $PROJECT -o jsonpath='{range .spec.containers[*]}{.name}{"\n"}{end}' | fzf)
 
-if [[ $1 == pod ]]; then
-
+if [[ $1 == "pod" ]]; then
+ echo "Pod"
 fi
 if [[ $1 == "logs" ]] ; then
 echo "Showing logs of $POD ..."
@@ -132,9 +152,13 @@ oc logs $POD -c $CONTAINER -n $PROJECT | less
 fi
 }
 
-function clean-container-images {
+function clean-container-images() {
 sudo podman rmi $(sudo podman images -a | grep -v 'localhost/kevydotvinu' | awk 'NR>1 {print $3}') -f
 podman rmi $(sudo podman images -a | grep -v 'localhost/kevydotvinu' | awk 'NR>1 {print $3}') -f
 sudo podman rm $(sudo podman ps -a | awk 'NR>1 {print $1}')
 podman rm $(sudo podman ps -a | awk 'NR>1 {print $1}')
+}
+
+function kinit-vkochuku() {
+echo $(pass kerberos.corp.redhat.com/vkochuku@REDHAT.COM) | kinit vkochuku
 }

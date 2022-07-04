@@ -162,3 +162,7 @@ podman rm $(sudo podman ps -a | awk 'NR>1 {print $1}')
 function kinit-vkochuku() {
 echo $(pass kerberos.corp.redhat.com/vkochuku@REDHAT.COM) | kinit vkochuku
 }
+
+function yq() {
+	podman run --rm -i -v "${PWD}":/workdir:z mikefarah/yq "$@"
+}

@@ -220,6 +220,7 @@ autocmd BufWinEnter *.* silent loadview
 
 "yaml
 autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
+autocmd BufReadPost *.bu set ft=yaml
 
 "vim-go
 let g:go_def_mode='gopls'

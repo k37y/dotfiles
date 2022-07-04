@@ -91,8 +91,11 @@ export PATH=$PATH:$GOROOT/bin
 export GOPATH=$HOME/Go
 export PATH=$PATH:$GOPATH/bin
 export GOPATH=$GOPATH:$HOME/Code
-export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
+export PATH=$PATH:${KREW_ROOT:-$HOME/.krew}/bin
 export PATH=$PATH:/usr/local/nvim/bin
+export PATH=$PATH:/usr/local/nodejs/bin
+export GEM_HOME=$HOME/.local/gems
+export PATH=$PATH:$HOME/.local/gems/bin
 
 # GPG SSH
 gpg-agent --quiet --enable-ssh-support --daemon >/dev/null 2>&1

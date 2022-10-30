@@ -11,4 +11,5 @@ alias pomodoro='sleep 20m && paplay /usr/share/sounds/freedesktop/stereo/complet
 alias vim='nvim'
 alias skopeo='sudo podman run -ti --rm --name=skopeo --net=host localhost/kevydotvinu/skopeo'
 alias copy='xclip -selection c'
-alias paste='xclip -selection clipboard -o'
+alias xpaste='xclip -selection clipboard -o'
+alias temp="paste <(cat /sys/class/thermal/thermal_zone*/type) <(cat /sys/class/thermal/thermal_zone*/temp) | column -s $'\t' -t | sed 's/\(.\)..$/.\1°C/'"

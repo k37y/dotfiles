@@ -92,8 +92,8 @@ export GOPATH=$HOME/Go
 export PATH=$PATH:$GOPATH/bin
 export GOPATH=$GOPATH:$HOME/Code
 export PATH=$PATH:${KREW_ROOT:-$HOME/.krew}/bin
-export PATH=$PATH:/usr/local/nvim/bin
-export PATH=$PATH:/usr/local/nodejs/bin
+export PATH=$PATH:$HOME/.local/nvim/bin:/usr/local/nvim/bin
+export PATH=$PATH:$HOME/.local/nodejs/bin:/usr/local/nodejs/bin
 export GEM_HOME=$HOME/.local/gems
 export PATH=$PATH:$HOME/.local/gems/bin
 

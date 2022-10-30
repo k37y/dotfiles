@@ -103,7 +103,7 @@ sudo podman run --rm --interactive --tty --net host --security-opt label=disable
 }
 
 function ubuntu() {
-sudo podman run --rm --interactive --tty --net host --security-opt label=disable --name=ubuntu docker.io/ubuntu
+	sudo podman run --rm --interactive --tty --net host --security-opt label=disable --name=ubuntu --volume $(pwd):/host --user $(id -u) --workdir /host docker.io/ubuntu
 }
 
 function archlinux() {
@@ -164,5 +164,9 @@ echo $(pass kerberos.corp.redhat.com/vkochuku@REDHAT.COM) | kinit vkochuku
 }
 
 function yq() {
-	podman run --rm -i -v "${PWD}":/workdir:z mikefarah/yq "$@"
+	podman run --rm -i -v "${PWD}":/workdir:Z mikefarah/yq "$@"
+}
+
+function mgp() {
+      curl -F 'title=Post request from a Curl command' -F 'paste=<-' http://curl-paste.example.local:9990
 }

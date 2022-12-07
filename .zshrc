@@ -86,7 +86,7 @@ export LANG=en_US.UTF-8
 export LC_ALL=en_US.UTF-8
 export LANGUAGE=en_US.UTF-8
 export KUBECONFIG=$HOME/.kube/config
-export GOROOT=/usr/local/go
+export GOROOT=${HOME}/.local/go
 export PATH=$PATH:$GOROOT/bin
 export GOPATH=$HOME/Go
 export PATH=$PATH:$GOPATH/bin
@@ -137,3 +137,4 @@ setopt HIST_SAVE_NO_DUPS         # Don't write duplicate entries in the history 
 setopt HIST_REDUCE_BLANKS        # Remove superfluous blanks before recording entry.
 setopt HIST_VERIFY               # Don't execute immediately upon history expansion.
 setopt HIST_BEEP                 # Beep when accessing nonexistent history.
+setopt HIST_IGNORE_SPACE         # Ignore command (begins with space) for history

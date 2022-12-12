@@ -96,6 +96,7 @@ export PATH=$PATH:$HOME/.local/nvim/bin:/usr/local/nvim/bin
 export PATH=$PATH:$HOME/.local/nodejs/bin:/usr/local/nodejs/bin
 export GEM_HOME=$HOME/.local/gems
 export PATH=$PATH:$HOME/.local/gems/bin
+export PATH=$PATH:$HOME/.local/goland/bin
 
 # GPG SSH
 gpg-agent --quiet --enable-ssh-support --daemon >/dev/null 2>&1

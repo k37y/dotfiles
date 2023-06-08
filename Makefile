@@ -103,6 +103,7 @@ ohmyzsh-theme:
 dotfiles-ohmyzsh-download:
 	@echo "Copying .zshrc ..."
 	cp -av .zshrc ${HOME}
+	cp -av .bash_profile ${HOME}
 	rm -rf ${HOME}/.zshrc.d && mkdir -p ${HOME}/.zshrc.d
 	cp -av .bash_alias ${HOME}/.zshrc.d
 	cp -av .bash_funcs ${HOME}/.zshrc.d

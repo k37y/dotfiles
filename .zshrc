@@ -141,7 +141,7 @@ setopt HIST_BEEP                 # Beep when accessing nonexistent history.
 setopt HIST_IGNORE_SPACE         # Ignore command (begins with space) for history
 
 if [ -d ${HOME}/.zshrc.d ]; then
-        for rc in ${HOME}/.zshrc.d/*; do
+        for rc in ${HOME}/.zshrc.d/.*; do
                 if [ -f "$rc" ]; then
                         . "$rc"
                 fi

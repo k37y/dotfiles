@@ -25,7 +25,7 @@ nvim: nvim-dir dotfiles-nvim-download nvim-dependency nvim-download nvim-plugins
 
 nvim-dir:
 	@echo "Creating directories for nvim ..."
-	mkdir -p ${HOME}/.local/bin ${HOME}/.local/nvim ${HOME}/.local/nodejs ${HOME}/.local/share/nvim/site/pack/coc/start ${HOME}/.zsh_history ${HOME}/.config/nvim ${HOME}/.zshrc.d
+	mkdir -p ${HOME}/.local/bin ${HOME}/.local/nvim ${HOME}/.local/nodejs ${HOME}/.local/share/nvim/site/pack/coc/start ${HOME}/.zsh_history ${HOME}/.config/nvim
 	@echo "OK!"
 
 dotfiles-nvim-download:
@@ -102,7 +102,8 @@ ohmyzsh-theme:
 
 dotfiles-ohmyzsh-download:
 	@echo "Copying .zshrc ..."
-	cp -av .zshrc ${HOME}/
-	cp -av .bash_alias ${HOME}/.zshrc.d/
-	cp -av .bash_funcs ${HOME}/.zshrc.d/
+	cp -av .zshrc ${HOME}
+	mkdir -p ${HOME}/.zshrc.d
+	cp -av .bash_alias ${HOME}/.zshrc.d
+	cp -av .bash_funcs ${HOME}/.zshrc.d
 	@echo "OK!"

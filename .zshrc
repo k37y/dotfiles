@@ -2,7 +2,7 @@
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
-export ZSH=$HOME/.oh-my-zsh
+export ZSH=${HOME}/.oh-my-zsh
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
@@ -71,13 +71,13 @@ ZSH_THEME="robbyrussell"
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(git zsh-autosuggestions tmux vi-mode oc)
 
-source $ZSH/oh-my-zsh.sh
+source ${ZSH}/oh-my-zsh.sh
 
 # User configuration
-[ -f $HOME/.bash_funcs ] && source $HOME/.bash_funcs
-[ -f $HOME/.bash_alias ] && source $HOME/.bash_alias
-[ -f $HOME/.bash_exports ] && source $HOME/.bash_exports
-[ -f $HOME/.fzf.zsh ] && source $HOME/.fzf.zsh
+[ -f ${HOME}/.bash_funcs ] && source ${HOME}/.bash_funcs
+[ -f ${HOME}/.bash_alias ] && source ${HOME}/.bash_alias
+[ -f ${HOME}/.bash_exports ] && source ${HOME}/.bash_exports
+[ -f ${HOME}/.fzf.zsh ] && source ${HOME}/.fzf.zsh
 
 # export MANPATH="/usr/local/man:$MANPATH"
 
@@ -85,18 +85,18 @@ source $ZSH/oh-my-zsh.sh
 export LANG=en_US.UTF-8
 export LC_ALL=en_US.UTF-8
 export LANGUAGE=en_US.UTF-8
-export KUBECONFIG=$HOME/.kube/config
+export KUBECONFIG=${HOME}/.kube/config
 export GOROOT=${HOME}/.local/go
-export PATH=$PATH:$GOROOT/bin
-export GOPATH=$HOME/Go
-export PATH=$PATH:$GOPATH/bin
-export GOPATH=$GOPATH:$HOME/Code
-export PATH=$PATH:${KREW_ROOT:-$HOME/.krew}/bin
-export PATH=$PATH:$HOME/.local/nvim/bin:/usr/local/nvim/bin
-export PATH=$PATH:$HOME/.local/nodejs/bin:/usr/local/nodejs/bin
-export GEM_HOME=$HOME/.local/gems
-export PATH=$PATH:$HOME/.local/gems/bin
-export PATH=$PATH:$HOME/.local/goland/bin
+export PATH=${GOROOT}/bin:${PATH}
+export GOPATH=${HOME}/Go
+export PATH=${GOPATH}/bin:${PATH}
+export GOPATH=${GOPATH}:${HOME}/Code
+export PATH=${KREW_ROOT:-${HOME}/.krew}/bin:${PATH}
+export PATH=${HOME}/.local/nvim/bin:/usr/local/nvim/bin:${PATH}
+export PATH=${HOME}/.local/nodejs/bin:/usr/local/nodejs/bin:${PATH}
+export GEM_HOME=${HOME}/.local/gems
+export PATH=${HOME}/.local/gems/bin:${PATH}
+export PATH=${HOME}/.local/goland/bin:${PATH}
 
 # GPG SSH
 gpg-agent --quiet --enable-ssh-support --daemon >/dev/null 2>&1
@@ -104,7 +104,7 @@ export SSH_AUTH_SOCK="$(gpgconf --list-dirs agent-ssh-socket)"
 export GPG_TTY=$(tty)
 
 # Preferred editor for local and remote sessions
-if [[ -n $SSH_CONNECTION ]]; then
+if [[ -n ${SSH_CONNECTION} ]]; then
   export EDITOR='vim'
 else
   export EDITOR='nvim'
@@ -122,7 +122,7 @@ fi
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
-HISTFILE=$HOME/.zsh_history/zsh_history
+HISTFILE=${HOME}/.zsh_history/zsh_history
 HISTSIZE=10000000
 SAVEHIST=10000000
 setopt BANG_HIST                 # Treat the '!' character specially during expansion.

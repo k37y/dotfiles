@@ -108,3 +108,12 @@ dotfiles-ohmyzsh-download:
 	cp -av .bash_alias ${HOME}/.zshrc.d
 	cp -av .bash_funcs ${HOME}/.zshrc.d
 	@echo "OK!"
+
+.PHONY: git
+
+git: git-config
+
+git-config:
+	@echo "Copying .gitconfig ..."
+	cp -av .gitconfig ${HOME}
+	@echo "OK!"

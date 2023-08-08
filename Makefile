@@ -16,7 +16,7 @@ ifndef GO_VERSION
 	$(error GO_VERSION is undefined | Example: 1.8.0)
 endif
 
-GO_LATEST_VERSION=$(shell curl -sL https://golang.org/dl/ | grep -Eo 'go[0-9]{1,2}.[0-9]{1,2}.[0-9]{1,2}.linux-amd64.tar.gz' | grep ${GO_VERSION} | head -n 1)
+GO_LATEST_VERSION=$(shell curl -sL https://golang.org/dl/ | grep -Eo 'go[0-9]{1,2}.[0-9]{1,2}.[0-9]{1,2}.linux-amd64.tar.gz' | grep go | head -n 1)
 GO_LATEST=https://go.dev/dl/${GO_LATEST_VERSION}
 
 .PHONY: nvim
@@ -117,3 +117,32 @@ git-config:
 	@echo "Copying .gitconfig ..."
 	cp -av .gitconfig ${HOME}
 	@echo "OK!"
+
+.PHONY: kind-download
+
+kind-download:
+	@echo "Downloading kind ..."
+	@sudo curl -sLo /usr/local/bin/kind $$(curl -sL https://api.github.com/repos/kubernetes-sigs/kind/releases/latest | jq -r '.assets | .[] | select(.name == "kind-linux-amd64") | .browser_download_url')
+	@sudo chmod +x /usr/local/bin/kind
+	@echo "OK"
+	@echo "Downloading kubectl ..."
+	@sudo curl -sLo /usr/local/bin/kubectl https://dl.k8s.io/release/$$(curl -sL https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl
+	@sudo chmod +x /usr/local/bin/kubectl
+	@echo "OK"
+
+.PHONY: kind-create
+
+kind-create-onp:
+	@echo "Creating kind cluster ..."
+	@sudo KIND_EXPERIMENTAL_PROVIDER=podman kind create cluster --name onp
+	@sudo cp /root/.kube/config ${HOME}/.kube/kind-config
+	@sudo chown onp:onp ${HOME}/.kube/kind-config
+	@echo "OK"
+	@echo "Try, export KUBECONFIG=${HOME}/.kube/kind-config && kubectl get nodes."
+
+.PHONY: kind-delete
+
+kind-delete-onp:
+	@echo "Deleting kind cluster ..."
+	@sudo KIND_EXPERIMENTAL_PROVIDER=podman kind delete cluster --name onp
+	@rm -rf ${HOME}/.kube/kind-config

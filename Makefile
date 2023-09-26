@@ -5,6 +5,7 @@ YQ_LATEST=$(shell curl -s https://api.github.com/repos/mikefarah/yq/releases/lat
 NVIM_LATEST=$(shell curl -s https://api.github.com/repos/neovim/neovim/releases/latest | jq -r '.assets | .[] | select(.name | contains("linux64.tar")) | .browser_download_url' | head -1)
 NODEJS_LATEST_VERSION=$(shell curl -s https://api.github.com/repos/nodejs/node/releases | jq -r '.[] | select(.name | contains("LTS")) | .tag_name' | head -n 1)
 NODEJS_LATEST=https://nodejs.org/dist/${NODEJS_LATEST_VERSION}/node-${NODEJS_LATEST_VERSION}-linux-x64.tar.xz
+FZF_LATEST=$(shell curl -s https://api.github.com/repos/junegunn/fzf/releases/latest | jq -r '.assets | .[] | select(.name | contains("linux_amd64")) | .browser_download_url' | head -1)
 
 check-env:
 ifndef GITHUB_TOKEN
@@ -146,3 +147,13 @@ kind-delete-onp:
 	@echo "Deleting kind cluster ..."
 	@sudo KIND_EXPERIMENTAL_PROVIDER=podman kind delete cluster --name onp
 	@rm -rf ${HOME}/.kube/kind-config
+
+.PHONY: fzf
+
+fzf:
+	@echo "Cloning fzf ..."
+	@rm -rf ${HOME}/.fzf && git clone https://github.com/junegunn/fzf.git ${HOME}/.fzf
+	@echo "Downloading fzf ..."
+	@curl -sL ${FZF_LATEST} | tar xz fzf -C ${HOME}/.local/bin/fzf
+	@echo "Patching ${HOME}/.fzf/shell/key-bindings.zsh ..."
+	@sed -i 's/\\ec/\^F/g' ${HOME}/.fzf/shell/key-bindings.zsh

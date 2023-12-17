@@ -154,6 +154,6 @@ fzf:
 	@echo "Cloning fzf ..."
 	@rm -rf ${HOME}/.fzf && git clone https://github.com/junegunn/fzf.git ${HOME}/.fzf
 	@echo "Downloading fzf ..."
-	@curl -sL ${FZF_LATEST} | tar xz fzf -C ${HOME}/.local/bin/fzf
+	@curl -sL ${FZF_LATEST} | tar xzf - -C ${HOME}/.local/bin fzf
 	@echo "Patching ${HOME}/.fzf/shell/key-bindings.zsh ..."
 	@sed -i 's/\\ec/\^F/g' ${HOME}/.fzf/shell/key-bindings.zsh

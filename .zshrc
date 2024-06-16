@@ -97,6 +97,7 @@ export GEM_HOME=${HOME}/.local/gems
 export PATH=${HOME}/.local/gems/bin:${PATH}
 export PATH=${HOME}/.local/goland/bin:${PATH}
 export PATH=${HOME}/.local/bin:${PATH}
+export PATH=/opt/homebrew/bin:${PATH}
 
 # GPG SSH
 gpg-agent --quiet --enable-ssh-support --daemon >/dev/null 2>&1

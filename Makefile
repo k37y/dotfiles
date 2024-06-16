@@ -1,11 +1,16 @@
 SHELL=/bin/bash
 DIR=$(shell pwd)
-JQ_LATEST=$(shell curl -s https://api.github.com/repos/jqlang/jq/releases/latest | jq -r '.assets | .[] | select(.name | contains("linux64")) | .browser_download_url')
-YQ_LATEST=$(shell curl -s https://api.github.com/repos/mikefarah/yq/releases/latest | jq -r '.assets | .[] | select(.name | contains("linux_amd64")) | .browser_download_url' | head -1)
-NVIM_LATEST=$(shell curl -s https://api.github.com/repos/neovim/neovim/releases/latest | jq -r '.assets | .[] | select(.name | contains("linux64.tar")) | .browser_download_url' | head -1)
-NODEJS_LATEST_VERSION=$(shell curl -s https://api.github.com/repos/nodejs/node/releases | jq -r '.[] | select(.name | contains("LTS")) | .tag_name' | head -n 1)
-NODEJS_LATEST=https://nodejs.org/dist/${NODEJS_LATEST_VERSION}/node-${NODEJS_LATEST_VERSION}-linux-x64.tar.xz
-FZF_LATEST=$(shell curl -s https://api.github.com/repos/junegunn/fzf/releases/latest | jq -r '.assets | .[] | select(.name | contains("linux_amd64")) | .browser_download_url' | head -1)
+JQ_LINUX_AMD64_LATEST=$(shell curl -s https://api.github.com/repos/jqlang/jq/releases/latest | jq -r '.assets | .[] | select(.name | contains("linux64")) | .browser_download_url')
+JQ_DARWIN_ARM64_LATEST=$(shell curl -s https://api.github.com/repos/jqlang/jq/releases/latest | jq -r '.assets | .[] | select(.name | contains("macos-arm64")) | .browser_download_url')
+YQ_LINUX_AMD64_LATEST=$(shell curl -s https://api.github.com/repos/mikefarah/yq/releases/latest | jq -r '.assets | .[] | select(.name | contains("linux_amd64")) | .browser_download_url' | head -1)
+YQ_DARWIN_ARM64_LATEST=$(shell curl -s https://api.github.com/repos/mikefarah/yq/releases/latest | jq -r '.assets | .[] | select(.name | contains("darwin_arm64")) | .browser_download_url' | head -1)
+NVIM_LINUX_AMD64_LATEST=$(shell curl -s https://api.github.com/repos/neovim/neovim/releases/latest | jq -r '.assets | .[] | select(.name | contains("linux64.tar")) | .browser_download_url' | head -1)
+NVIM_DARWIN_ARM64_LATEST=$(shell curl -s https://api.github.com/repos/neovim/neovim/releases/latest | jq -r '.assets | .[] | select(.name | contains("macos-arm64")) | .browser_download_url' | head -1)
+NODEJS_LINUX_AMD64_LATEST_VERSION=$(shell curl -s https://api.github.com/repos/nodejs/node/releases | jq -r '.[] | select(.name | contains("LTS")) | .tag_name' | head -n 1)
+NODEJS_LINUX_AMD64_LATEST=https://nodejs.org/dist/${NODEJS_LATEST_VERSION}/node-${NODEJS_LATEST_VERSION}-linux-x64.tar.xz
+NODEJS_DARWIN_ARM64_LATEST=https://nodejs.org/dist/${NODEJS_LATEST_VERSION}/node-${NODEJS_LATEST_VERSION}-darwin-arm64.tar.xz
+FZF_LINUX_AMD64_LATEST=$(shell curl -s https://api.github.com/repos/junegunn/fzf/releases/latest | jq -r '.assets | .[] | select(.name | contains("linux_amd64")) | .browser_download_url' | head -1)
+FZF_DARWIN_ARM64_LATEST=$(shell curl -s https://api.github.com/repos/junegunn/fzf/releases/latest | jq -r '.assets | .[] | select(.name | contains("darwin_arm64")) | .browser_download_url' | head -1)
 
 check-env:
 ifndef GITHUB_TOKEN
@@ -17,50 +22,52 @@ ifndef GO_VERSION
 	$(error GO_VERSION is undefined | Example: 1.8.0)
 endif
 
-GO_LATEST_VERSION=$(shell curl -sL https://golang.org/dl/ | grep -Eo 'go[0-9]{1,2}.[0-9]{1,2}.[0-9]{1,2}.linux-amd64.tar.gz' | grep go | head -n 1)
-GO_LATEST=https://go.dev/dl/${GO_LATEST_VERSION}
+GO_LINUX_AMD64_LATEST_VERSION=$(shell curl -sL https://golang.org/dl/ | grep -Eo 'go[0-9]{1,2}.[0-9]{1,2}.[0-9]{1,2}.linux-amd64.tar.gz' | grep go | head -n 1)
+GO_DARWIN_ARM64_LATEST_VERSION=$(shell curl -sL https://golang.org/dl/ | grep -Eo 'go[0-9]{1,2}.[0-9]{1,2}.[0-9]{1,2}.darwin-arm64.tar.gz' | grep go | head -n 1)
+GO_LINUX_AMD64_LATEST=https://go.dev/dl/${GO_LINUX_AMD64_LATEST_VERSION}
+GO_DARWIN_ARM64_LATEST=https://go.dev/dl/${GO_DARWIN_ARM64_LATEST_VERSION}
 
-.PHONY: nvim
+.PHONY: nvim-darwin-arm64
 
-nvim: nvim-dir dotfiles-nvim-download nvim-dependency nvim-download nvim-plugins
+nvim-darwin-arm64: nvim-darwin-arm64-dir dotfiles-nvim-darwin-arm64-download nvim-darwin-arm64-dependency nvim-darwin-arm64-download nvim-darwin-arm64-plugins
 
-nvim-dir:
+nvim-darwin-arm64-dir:
 	@echo "Creating directories for nvim ..."
 	mkdir -p ${HOME}/.local/bin ${HOME}/.local/nvim ${HOME}/.local/nodejs ${HOME}/.local/share/nvim/site/pack/coc/start ${HOME}/.zsh_history ${HOME}/.config/nvim
 	@echo "OK!"
 
-dotfiles-nvim-download:
+dotfiles-nvim-darwin-arm64-download:
 	@echo "Copying .config/nvim ..."
 	cp -av .config/nvim/* ${HOME}/.config/nvim
 	@echo "OK!"
 
-nvim-dependency: jq-download yq-download nodejs-download yarn-download
+nvim-darwin-arm64-dependency: jq-darwin-arm64-download yq-darwin-arm64-download nodejs-darwin-arm64-download yarn-darwin-arm64-download
 
-jq-download:
+jq-darwin-arm64-download:
 	@echo "Downloading jq ..."
-	curl -H "Authorization: ${GITHUB_TOKEN}" -sL ${JQ_LATEST} -o ${HOME}/.local/bin/jq && chmod +x ${HOME}/.local/bin/jq
+	curl -H "Authorization: ${GITHUB_TOKEN}" -sL ${JQ_DARWIN_ARM64_LATEST} -o ${HOME}/.local/bin/jq && chmod +x ${HOME}/.local/bin/jq
 	@echo "OK!"
 
-yq-download:
+yq-darwin-arm64-download:
 	@echo "Downloading yq ..."
-	curl -sL ${YQ_LATEST} -o ${HOME}/.local/bin/yq && chmod +x ${HOME}/.local/bin/yq
+	curl -sL ${YQ_DARWIN_ARM64_LATEST} -o ${HOME}/.local/bin/yq && chmod +x ${HOME}/.local/bin/yq
 	@echo "OK!"
 
-nodejs-download:
+nodejs-darwin-arm64-download:
 	@echo "Downloading nodejs and npm ..."
-	curl -sL ${NODEJS_LATEST} | tar xJf - -C ${HOME}/.local/nodejs --strip-components=1
+	curl -sL ${NODEJS_DARWIN_ARM64_LATEST} | tar xJf - -C ${HOME}/.local/nodejs --strip-components=1
 	@echo "OK!"
 
-yarn-download:
+yarn-darwin-arm64-download:
 	@echo "Installing yarn and packages ..."
 	export PATH=${PATH}:${HOME}/.local/nodejs/bin && ${HOME}/.local/nodejs/bin/npm install -g yarn
 
-nvim-download:
+nvim-darwin-arm64-download:
 	@echo "Downloading nvim ..."
-	curl -sL ${NVIM_LATEST} | tar xzf - -C ${HOME}/.local/nvim --strip-components=1
+	curl -sL ${NVIM_DARWIN_ARM64_LATEST} | tar xzf - -C ${HOME}/.local/nvim --strip-components=1
 	@echo "OK!"
 
-nvim-plugins:
+nvim-darwin-arm64-plugins:
 	@echo "Downloading vim-plug ..."
 	curl -sfLo ${HOME}/.local/share/nvim/site/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 	@echo "OK!"
@@ -68,22 +75,88 @@ nvim-plugins:
 	cd ${HOME}/.local/share/nvim/site/pack/coc/start && curl -sfL https://github.com/neoclide/coc.nvim/archive/release.tar.gz | tar xzf -
 	@echo "OK!"
 
-.PHONY: go
+.PHONY: nvim-linux-amd64
 
-go: go-version go-dir go-download
+nvim-linux-amd64: nvim-linux-amd64-dir dotfiles-nvim-linux-amd64-download nvim-linux-amd64-dependency nvim-linux-amd64-download nvim-linux-amd64-plugins
 
-go-find-version: go-version
+nvim-linux-amd64-dir:
+	@echo "Creating directories for nvim ..."
+	mkdir -p ${HOME}/.local/bin ${HOME}/.local/nvim ${HOME}/.local/nodejs ${HOME}/.local/share/nvim/site/pack/coc/start ${HOME}/.zsh_history ${HOME}/.config/nvim
+	@echo "OK!"
+
+dotfiles-nvim-linux-amd64-download:
+	@echo "Copying .config/nvim ..."
+	cp -av .config/nvim/* ${HOME}/.config/nvim
+	@echo "OK!"
+
+nvim-linux-amd64-dependency: jq-linux-amd64-download yq-linux-amd64-download nodejs-linux-amd64-download yarn-linux-amd64-download
+
+jq-linux-amd64-download:
+	@echo "Downloading jq ..."
+	curl -H "Authorization: ${GITHUB_TOKEN}" -sL ${JQ_LINUX_AMD64_LATEST} -o ${HOME}/.local/bin/jq && chmod +x ${HOME}/.local/bin/jq
+	@echo "OK!"
+
+yq-linux-amd64-download:
+	@echo "Downloading yq ..."
+	curl -sL ${YQ_LINUX_AMD64_LATEST} -o ${HOME}/.local/bin/yq && chmod +x ${HOME}/.local/bin/yq
+	@echo "OK!"
+
+nodejs-linux-amd64-download:
+	@echo "Downloading nodejs and npm ..."
+	curl -sL ${NODEJS_LINUX_AMD64_LATEST} | tar xJf - -C ${HOME}/.local/nodejs --strip-components=1
+	@echo "OK!"
+
+yarn-linux-amd64-download:
+	@echo "Installing yarn and packages ..."
+	export PATH=${PATH}:${HOME}/.local/nodejs/bin && ${HOME}/.local/nodejs/bin/npm install -g yarn
+
+nvim-linux-amd64-download:
+	@echo "Downloading nvim ..."
+	curl -sL ${NVIM_LINUX_AMD64_LATEST} | tar xzf - -C ${HOME}/.local/nvim --strip-components=1
+	@echo "OK!"
+
+nvim-linux-amd64-plugins:
+	@echo "Downloading vim-plug ..."
+	curl -sfLo ${HOME}/.local/share/nvim/site/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+	@echo "OK!"
+	@echo "Installing coc ..."
+	cd ${HOME}/.local/share/nvim/site/pack/coc/start && curl -sfL https://github.com/neoclide/coc.nvim/archive/release.tar.gz | tar xzf -
+	@echo "OK!"
+
+.PHONY: go-linux-amd64
+
+go-linux-amd64: go-linux-amd64-version go-linux-amd64-dir go-linux-amd64-download
+
+go-linux-amd64-find-version: go-linux-amd64-version
 	@echo "Finding version ..."
 	curl -sL https://golang.org/dl/ | grep -Eo 'go[0-9]{1,2}.[0-9]{1,2}.[0-9]{1,2}.linux-amd64.tar.gz' | grep ${GO_VERSION}
 
-go-dir:
+go-linux-amd64-dir:
 	@echo "Creating directories for go ..."
 	mkdir -p ${HOME}/.local/go
 	@echo "OK!"
 
-go-download:
+go-linux-amd64-download:
 	@echo "Downloading go ..."
-	curl -sfL ${GO_LATEST} | tar xzf - -C ${HOME}/.local
+	curl -sfL ${GO_LINUX_AMD64_LATEST} | tar xzf - -C ${HOME}/.local
+	@echo "OK!"
+
+.PHONY: go-darwin-arm64
+
+go-darwin-arm64: go-darwin-arm64-version go-darwin-arm64-dir go-darwin-arm64-download
+
+go-darwin-arm64-find-version: go-version
+	@echo "Finding version ..."
+	curl -sL https://golang.org/dl/ | grep -Eo 'go[0-9]{1,2}.[0-9]{1,2}.[0-9]{1,2}.darwin-arm64.tar.gz' | grep ${GO_VERSION}
+
+go-darwin-arm64-dir:
+	@echo "Creating directories for go ..."
+	mkdir -p ${HOME}/.local/go
+	@echo "OK!"
+
+go-darwin-arm64-download:
+	@echo "Downloading go ..."
+	curl -sfL ${GO_DARWIN_ARM64_LATEST} | tar xzf - -C ${HOME}/.local
 	@echo "OK!"
 
 .PHONY: ohmyzsh
@@ -119,15 +192,27 @@ git-config:
 	cp -av .gitconfig ${HOME}
 	@echo "OK!"
 
-.PHONY: kind-download
+.PHONY: kind-linux-amd64-download
 
-kind-download:
+kind-linux-amd64-download:
 	@echo "Downloading kind ..."
 	@sudo curl -sLo /usr/local/bin/kind $$(curl -sL https://api.github.com/repos/kubernetes-sigs/kind/releases/latest | jq -r '.assets | .[] | select(.name == "kind-linux-amd64") | .browser_download_url')
 	@sudo chmod +x /usr/local/bin/kind
 	@echo "OK"
 	@echo "Downloading kubectl ..."
 	@sudo curl -sLo /usr/local/bin/kubectl https://dl.k8s.io/release/$$(curl -sL https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl
+	@sudo chmod +x /usr/local/bin/kubectl
+	@echo "OK"
+
+.PHONY: kind-darwin-arm64-download
+
+kind-darwin-arm64-download:
+	@echo "Downloading kind ..."
+	@sudo curl -sLo /usr/local/bin/kind $$(curl -sL https://api.github.com/repos/kubernetes-sigs/kind/releases/latest | jq -r '.assets | .[] | select(.name == "kind-darwin-amd64") | .browser_download_url')
+	@sudo chmod +x /usr/local/bin/kind
+	@echo "OK"
+	@echo "Downloading kubectl ..."
+	@sudo curl -sLo /usr/local/bin/kubectl https://dl.k8s.io/release/$$(curl -sL https://dl.k8s.io/release/stable.txt)/bin/darwin/arm64/kubectl
 	@sudo chmod +x /usr/local/bin/kubectl
 	@echo "OK"
 
@@ -148,12 +233,33 @@ kind-delete-onp:
 	@sudo KIND_EXPERIMENTAL_PROVIDER=podman kind delete cluster --name onp
 	@rm -rf ${HOME}/.kube/kind-config
 
-.PHONY: fzf
+.PHONY: fzf-linux-amd64
 
-fzf:
+fzf-linux-amd64:
 	@echo "Cloning fzf ..."
 	@rm -rf ${HOME}/.fzf && git clone https://github.com/junegunn/fzf.git ${HOME}/.fzf
 	@echo "Downloading fzf ..."
-	@curl -sL ${FZF_LATEST} | tar xzf - -C ${HOME}/.local/bin fzf
+	@curl -sL ${FZF_LINUX_AMD64_LATEST} | tar xzf - -C ${HOME}/.local/bin fzf
 	@echo "Patching ${HOME}/.fzf/shell/key-bindings.zsh ..."
 	@sed -i 's/\\ec/\^F/g' ${HOME}/.fzf/shell/key-bindings.zsh
+
+.PHONY: fzf-darwin-arm64
+
+fzf-darwin-arm64:
+	@echo "Cloning fzf ..."
+	@rm -rf ${HOME}/.fzf && git clone https://github.com/junegunn/fzf.git ${HOME}/.fzf
+	@echo "Downloading fzf ..."
+	@curl -sL ${FZF_DARWIN_ARM64_LATEST} | tar xzf - -C ${HOME}/.local/bin fzf
+	@chmod +x ~/.local/bin/fzf
+	@echo "Patching ${HOME}/.fzf/shell/key-bindings.zsh ..."
+	@sed -i '' 's/\\ec/\^F/g' ${HOME}/.fzf/shell/key-bindings.zsh
+
+.PHONY: gnupg
+
+gnupg:
+	@echo "Configuring GNUPG ..."
+	mkdir -p ${HOME}/.gnupg && cp -av ./.gnupg/gpg-agent.conf ${HOME}/.gnupg/
+	@echo "OK!"
+	@echo "Configuring GNUPG SSH ..."
+	gpg --list-keys --with-keygrip | awk '/\[A\]/{getline; print $$3}' >> ${HOME}/.gnupg/sshcontrol
+	@echo "OK!"

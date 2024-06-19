@@ -6,9 +6,9 @@ YQ_LINUX_AMD64_LATEST=$(shell curl -s https://api.github.com/repos/mikefarah/yq/
 YQ_DARWIN_ARM64_LATEST=$(shell curl -s https://api.github.com/repos/mikefarah/yq/releases/latest | jq -r '.assets | .[] | select(.name | contains("darwin_arm64")) | .browser_download_url' | head -1)
 NVIM_LINUX_AMD64_LATEST=$(shell curl -s https://api.github.com/repos/neovim/neovim/releases/latest | jq -r '.assets | .[] | select(.name | contains("linux64.tar")) | .browser_download_url' | head -1)
 NVIM_DARWIN_ARM64_LATEST=$(shell curl -s https://api.github.com/repos/neovim/neovim/releases/latest | jq -r '.assets | .[] | select(.name | contains("macos-arm64")) | .browser_download_url' | head -1)
-NODEJS_LINUX_AMD64_LATEST_VERSION=$(shell curl -s https://api.github.com/repos/nodejs/node/releases | jq -r '.[] | select(.name | contains("LTS")) | .tag_name' | head -n 1)
-NODEJS_LINUX_AMD64_LATEST=https://nodejs.org/dist/${NODEJS_LATEST_VERSION}/node-${NODEJS_LATEST_VERSION}-linux-x64.tar.xz
-NODEJS_DARWIN_ARM64_LATEST=https://nodejs.org/dist/${NODEJS_LATEST_VERSION}/node-${NODEJS_LATEST_VERSION}-darwin-arm64.tar.xz
+NODEJS_LATEST_LTS_VERSION=$(shell curl -s https://api.github.com/repos/nodejs/node/releases | jq -r '.[] | select(.name | contains("LTS")) | .tag_name' | head -n 1)
+NODEJS_LINUX_AMD64_LATEST=https://nodejs.org/dist/${NODEJS_LATEST_LTS_VERSION}/node-${NODEJS_LATEST_LTS_VERSION}-linux-x64.tar.xz
+NODEJS_DARWIN_ARM64_LATEST=https://nodejs.org/dist/${NODEJS_LATEST_LTS_VERSION}/node-${NODEJS_LATEST_LTS_VERSION}-darwin-arm64.tar.xz
 FZF_LINUX_AMD64_LATEST=$(shell curl -s https://api.github.com/repos/junegunn/fzf/releases/latest | jq -r '.assets | .[] | select(.name | contains("linux_amd64")) | .browser_download_url' | head -1)
 FZF_DARWIN_ARM64_LATEST=$(shell curl -s https://api.github.com/repos/junegunn/fzf/releases/latest | jq -r '.assets | .[] | select(.name | contains("darwin_arm64")) | .browser_download_url' | head -1)
 
@@ -167,6 +167,7 @@ ohmyzsh-download:
 	@echo "Installing oh-my-zsh ..."
 	rm -rf ~/.oh-my-zsh && git clone https://github.com/ohmyzsh/ohmyzsh.git ~/.oh-my-zsh
 	git clone https://github.com/zsh-users/zsh-autosuggestions.git ${HOME}/.oh-my-zsh/custom/plugins/zsh-autosuggestions
+	git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${HOME}/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
 	@echo "OK!"
 
 ohmyzsh-theme:

@@ -22,8 +22,8 @@ ifndef GO_VERSION
 	$(error GO_VERSION is undefined | Example: 1.8.0)
 endif
 
-GO_LINUX_AMD64_LATEST_VERSION=$(shell curl -sL https://golang.org/dl/ | grep -Eo 'go[0-9]{1,2}.[0-9]{1,2}.[0-9]{1,2}.linux-amd64.tar.gz' | grep go | head -n 1)
-GO_DARWIN_ARM64_LATEST_VERSION=$(shell curl -sL https://golang.org/dl/ | grep -Eo 'go[0-9]{1,2}.[0-9]{1,2}.[0-9]{1,2}.darwin-arm64.tar.gz' | grep go | head -n 1)
+GO_LINUX_AMD64_LATEST_VERSION=$(shell curl -sL https://golang.org/dl/ | grep -Eo 'go[0-9]{1,2}.[0-9]{1,2}.[0-9]{1,2}.linux-amd64.tar.gz' | grep ${GO_VERSION} | head -n 1)
+GO_DARWIN_ARM64_LATEST_VERSION=$(shell curl -sL https://golang.org/dl/ | grep -Eo 'go[0-9]{1,2}.[0-9]{1,2}.[0-9]{1,2}.darwin-arm64.tar.gz' | grep ${GO_VERSION} | head -n 1)
 GO_LINUX_AMD64_LATEST=https://go.dev/dl/${GO_LINUX_AMD64_LATEST_VERSION}
 GO_DARWIN_ARM64_LATEST=https://go.dev/dl/${GO_DARWIN_ARM64_LATEST_VERSION}
 
@@ -125,9 +125,9 @@ nvim-linux-amd64-plugins:
 
 .PHONY: go-linux-amd64
 
-go-linux-amd64: go-linux-amd64-version go-linux-amd64-dir go-linux-amd64-download
+go-linux-amd64: go-version go-linux-amd64-dir go-linux-amd64-download
 
-go-linux-amd64-find-version: go-linux-amd64-version
+go-linux-amd64-find-version: go-version
 	@echo "Finding version ..."
 	curl -sL https://golang.org/dl/ | grep -Eo 'go[0-9]{1,2}.[0-9]{1,2}.[0-9]{1,2}.linux-amd64.tar.gz' | grep ${GO_VERSION}
 
@@ -143,7 +143,7 @@ go-linux-amd64-download:
 
 .PHONY: go-darwin-arm64
 
-go-darwin-arm64: go-darwin-arm64-version go-darwin-arm64-dir go-darwin-arm64-download
+go-darwin-arm64: go-version go-darwin-arm64-dir go-darwin-arm64-download
 
 go-darwin-arm64-find-version: go-version
 	@echo "Finding version ..."

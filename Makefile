@@ -12,6 +12,12 @@ NODEJS_DARWIN_ARM64_LATEST=https://nodejs.org/dist/${NODEJS_LATEST_LTS_VERSION}/
 FZF_LINUX_AMD64_LATEST=$(shell curl -s https://api.github.com/repos/junegunn/fzf/releases/latest | jq -r '.assets | .[] | select(.name | contains("linux_amd64")) | .browser_download_url' | head -1)
 FZF_DARWIN_ARM64_LATEST=$(shell curl -s https://api.github.com/repos/junegunn/fzf/releases/latest | jq -r '.assets | .[] | select(.name | contains("darwin_arm64")) | .browser_download_url' | head -1)
 
+.PHONY: help
+
+help: ### Show this help message
+	@echo "Available targets:"
+	@grep -E '^[a-zA-Z0-9_-]+:.*?### .*$$' $(MAKEFILE_LIST) | awk 'BEGIN {FS = ":.*?### "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'
+
 check-env:
 ifndef GITHUB_TOKEN
 	$(error GITHUB_TOKEN is undefined | Get it from https://github.com/settings/tokens)
@@ -77,7 +83,7 @@ nvim-darwin-arm64-plugins:
 
 .PHONY: nvim-linux-amd64
 
-nvim-linux-amd64: nvim-linux-amd64-dir dotfiles-nvim-linux-amd64-download nvim-linux-amd64-dependency nvim-linux-amd64-download nvim-linux-amd64-plugins
+nvim-linux-amd64: nvim-linux-amd64-dir dotfiles-nvim-linux-amd64-download nvim-linux-amd64-dependency nvim-linux-amd64-download nvim-linux-amd64-plugins ### Install nvim on Linux x86
 
 nvim-linux-amd64-dir:
 	@echo "Creating directories for nvim ..."
@@ -125,7 +131,7 @@ nvim-linux-amd64-plugins:
 
 .PHONY: go-linux-amd64
 
-go-linux-amd64: go-version go-linux-amd64-dir go-linux-amd64-download
+go-linux-amd64: go-version go-linux-amd64-dir go-linux-amd64-download ### Install Go on Linux x86
 
 go-linux-amd64-find-version: go-version
 	@echo "Finding version ..."
@@ -161,7 +167,7 @@ go-darwin-arm64-download:
 
 .PHONY: ohmyzsh
 
-ohmyzsh: ohmyzsh-download ohmyzsh-theme dotfiles-ohmyzsh-download
+ohmyzsh: ohmyzsh-download ohmyzsh-theme dotfiles-ohmyzsh-download ### Install and configure Oh My Zsh!
 
 ohmyzsh-download:
 	@echo "Installing oh-my-zsh ..."
@@ -236,7 +242,7 @@ kind-delete-onp:
 
 .PHONY: fzf-linux-amd64
 
-fzf-linux-amd64:
+fzf-linux-amd64: ### Install fzf on Linux x86
 	@echo "Cloning fzf ..."
 	@rm -rf ${HOME}/.fzf && git clone https://github.com/junegunn/fzf.git ${HOME}/.fzf
 	@echo "Downloading fzf ..."

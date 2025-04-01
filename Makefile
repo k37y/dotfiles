@@ -149,7 +149,7 @@ go-linux-amd64-download:
 
 .PHONY: go-darwin-arm64
 
-go-darwin-arm64: go-version go-darwin-arm64-dir go-darwin-arm64-download
+go-darwin-arm64: go-version go-darwin-arm64-dir go-darwin-arm64-download ### Install Go on Mac ARM64
 
 go-darwin-arm64-find-version: go-version
 	@echo "Finding version ..."
@@ -192,7 +192,7 @@ dotfiles-ohmyzsh-download:
 
 .PHONY: git
 
-git: git-config
+git: git-config ### Configure Git
 
 git-config:
 	@echo "Copying .gitconfig ..."
@@ -252,7 +252,7 @@ fzf-linux-amd64: ### Install fzf on Linux x86
 
 .PHONY: fzf-darwin-arm64
 
-fzf-darwin-arm64:
+fzf-darwin-arm64: ### Install fzf on Mac ARM64
 	@echo "Cloning fzf ..."
 	@rm -rf ${HOME}/.fzf && git clone https://github.com/junegunn/fzf.git ${HOME}/.fzf
 	@echo "Downloading fzf ..."
@@ -263,7 +263,7 @@ fzf-darwin-arm64:
 
 .PHONY: gnupg
 
-gnupg:
+gnupg: ### Configure GnuPG
 	@echo "Configuring GNUPG ..."
 	mkdir -p ${HOME}/.gnupg && cp -av ./.gnupg/gpg-agent.conf ${HOME}/.gnupg/
 	@echo "OK!"

@@ -35,7 +35,7 @@ GO_DARWIN_ARM64_LATEST=https://go.dev/dl/${GO_DARWIN_ARM64_LATEST_VERSION}
 
 .PHONY: nvim-darwin-arm64
 
-nvim-darwin-arm64: nvim-darwin-arm64-dir dotfiles-nvim-darwin-arm64-download nvim-darwin-arm64-dependency nvim-darwin-arm64-download nvim-darwin-arm64-plugins
+nvim-darwin-arm64: nvim-darwin-arm64-dir dotfiles-nvim-darwin-arm64-download nvim-darwin-arm64-dependency nvim-darwin-arm64-download nvim-darwin-arm64-plugins ### Install nvim on Mac ARM64
 
 nvim-darwin-arm64-dir:
 	@echo "Creating directories for nvim ..."
@@ -201,7 +201,7 @@ git-config:
 
 .PHONY: kind-linux-amd64-download
 
-kind-linux-amd64-download:
+kind-linux-amd64-download: ### Install Kind on Linux x86
 	@echo "Downloading kind ..."
 	@sudo curl -sLo /usr/local/bin/kind $$(curl -sL https://api.github.com/repos/kubernetes-sigs/kind/releases/latest | jq -r '.assets | .[] | select(.name == "kind-linux-amd64") | .browser_download_url')
 	@sudo chmod +x /usr/local/bin/kind
@@ -213,7 +213,7 @@ kind-linux-amd64-download:
 
 .PHONY: kind-darwin-arm64-download
 
-kind-darwin-arm64-download:
+kind-darwin-arm64-download: ### Install Kind on Mac ARM64
 	@echo "Downloading kind ..."
 	@sudo curl -sLo /usr/local/bin/kind $$(curl -sL https://api.github.com/repos/kubernetes-sigs/kind/releases/latest | jq -r '.assets | .[] | select(.name == "kind-darwin-amd64") | .browser_download_url')
 	@sudo chmod +x /usr/local/bin/kind
@@ -225,7 +225,7 @@ kind-darwin-arm64-download:
 
 .PHONY: kind-create
 
-kind-create-onp:
+kind-create-onp: ### Create a Kind cluster
 	@echo "Creating kind cluster ..."
 	@sudo KIND_EXPERIMENTAL_PROVIDER=podman kind create cluster --name onp
 	@sudo cp /root/.kube/config ${HOME}/.kube/kind-config
@@ -235,7 +235,7 @@ kind-create-onp:
 
 .PHONY: kind-delete
 
-kind-delete-onp:
+kind-delete-onp: ### Delete the Kind cluster
 	@echo "Deleting kind cluster ..."
 	@sudo KIND_EXPERIMENTAL_PROVIDER=podman kind delete cluster --name onp
 	@rm -rf ${HOME}/.kube/kind-config

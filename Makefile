@@ -25,7 +25,7 @@ endif
 
 go-version:
 ifndef GO_VERSION
-	$(error GO_VERSION is undefined | Example: 1.8.0)
+	$(error GO_VERSION is undefined | Ex: GO_VERSION=1.21 | GO_VERSION=go for latest)
 endif
 
 GO_LINUX_AMD64_LATEST_VERSION=$(shell curl -sL https://golang.org/dl/ | grep -Eo 'go[0-9]{1,2}.[0-9]{1,2}.[0-9]{1,2}.linux-amd64.tar.gz' | grep ${GO_VERSION} | head -n 1)
@@ -133,9 +133,9 @@ nvim-linux-amd64-plugins:
 
 go-linux-amd64: go-version go-linux-amd64-dir go-linux-amd64-download ### Install Go on Linux x86
 
-go-linux-amd64-find-version: go-version
+go-linux-amd64-find-version: go-version ### Find Golang version for x86_64
 	@echo "Finding version ..."
-	curl -sL https://golang.org/dl/ | grep -Eo 'go[0-9]{1,2}.[0-9]{1,2}.[0-9]{1,2}.linux-amd64.tar.gz' | grep ${GO_VERSION}
+	curl -sL https://golang.org/dl/ | grep -Eo 'go[0-9]{1,2}.[0-9]{1,2}.[0-9]{1,2}.linux-amd64.tar.gz' | grep ${GO_VERSION} | head
 
 go-linux-amd64-dir:
 	@echo "Creating directories for go ..."
@@ -151,9 +151,9 @@ go-linux-amd64-download:
 
 go-darwin-arm64: go-version go-darwin-arm64-dir go-darwin-arm64-download ### Install Go on Mac ARM64
 
-go-darwin-arm64-find-version: go-version
+go-darwin-arm64-find-version: go-version ### Find Golang version for ARM64
 	@echo "Finding version ..."
-	curl -sL https://golang.org/dl/ | grep -Eo 'go[0-9]{1,2}.[0-9]{1,2}.[0-9]{1,2}.darwin-arm64.tar.gz' | grep ${GO_VERSION}
+	curl -sL https://golang.org/dl/ | grep -Eo 'go[0-9]{1,2}.[0-9]{1,2}.[0-9]{1,2}.darwin-arm64.tar.gz' | grep ${GO_VERSION} | head
 
 go-darwin-arm64-dir:
 	@echo "Creating directories for go ..."

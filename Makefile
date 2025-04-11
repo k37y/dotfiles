@@ -1,7 +1,7 @@
 SHELL=/bin/bash
 DIR=$(shell pwd)
-JQ_LINUX_AMD64_LATEST=$(shell curl -s https://api.github.com/repos/jqlang/jq/releases/latest | jq -r '.assets | .[] | select(.name | contains("linux64")) | .browser_download_url')
-JQ_DARWIN_ARM64_LATEST=$(shell curl -s https://api.github.com/repos/jqlang/jq/releases/latest | jq -r '.assets | .[] | select(.name | contains("macos-arm64")) | .browser_download_url')
+JQ_LINUX_AMD64_LATEST=$(shell curl -s https://api.github.com/repos/jqlang/jq/releases/latest | grep browser_download_url | grep linux64 | cut -d '"' -f 4)
+JQ_DARWIN_ARM64_LATEST=$(shell curl -s https://api.github.com/repos/jqlang/jq/releases/latest | grep browser_download_url | grep macos-arm64 | cut -d '"' -f 4)
 YQ_LINUX_AMD64_LATEST=$(shell curl -s https://api.github.com/repos/mikefarah/yq/releases/latest | jq -r '.assets | .[] | select(.name | contains("linux_amd64")) | .browser_download_url' | head -1)
 YQ_DARWIN_ARM64_LATEST=$(shell curl -s https://api.github.com/repos/mikefarah/yq/releases/latest | jq -r '.assets | .[] | select(.name | contains("darwin_arm64")) | .browser_download_url' | head -1)
 NVIM_LINUX_AMD64_LATEST=$(shell curl -s https://api.github.com/repos/neovim/neovim/releases/latest | jq -r '.assets | .[] | select(.name | contains("linux64.tar")) | .browser_download_url' | head -1)

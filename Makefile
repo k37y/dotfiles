@@ -144,7 +144,7 @@ go-linux-amd64-dir:
 
 go-linux-amd64-download:
 	@echo "Downloading go ..."
-	curl -sfL ${GO_LINUX_AMD64_LATEST} | tar xzf - -C ${HOME}/.local
+	rm -rf ${HOME}/.local/go && curl -sfL ${GO_LINUX_AMD64_LATEST} | tar xzf - -C ${HOME}/.local
 	@echo "OK!"
 
 .PHONY: go-darwin-arm64
@@ -162,7 +162,7 @@ go-darwin-arm64-dir:
 
 go-darwin-arm64-download:
 	@echo "Downloading go ..."
-	curl -sfL ${GO_DARWIN_ARM64_LATEST} | tar xzf - -C ${HOME}/.local
+	rm -rf ${HOME}/.local/go && curl -sfL ${GO_DARWIN_ARM64_LATEST} | tar xzf - -C ${HOME}/.local
 	@echo "OK!"
 
 .PHONY: ohmyzsh

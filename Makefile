@@ -267,9 +267,24 @@ gnupg: ### Configure GnuPG
 	@echo "Configuring GNUPG ..."
 	mkdir -p ${HOME}/.gnupg && cp -av ./.gnupg/gpg-agent.conf ${HOME}/.gnupg/
 	@echo "OK!"
+	@echo "Configuring GNUPG SSH ..."
+	gpg --list-keys --with-keygrip | awk '/\[A\]/{getline; print $$3}' >> ${HOME}/.gnupg/sshcontrol
+	@echo "OK!"
+
+.PHONY: gnupg-ssh
+
+gnupg-ssh: ### Configure GnuPG on SSH host
+	@echo "Disabling gpg-agent.socket ..."
+	systemctl --user disable gpg-agent.socket
+	@echo "OK!"
 	@echo "Importing GNUPG public key ..."
 	gpg --keyserver hkp://keyserver.ubuntu.com --recv-keys 14D8B9397A8F10DA44B00FE3B5CCF2B7D917627C
 	@echo "OK!"
-	@echo "Configuring GNUPG SSH ..."
-	gpg --list-keys --with-keygrip | awk '/\[A\]/{getline; print $$3}' >> ${HOME}/.gnupg/sshcontrol
+	@echo "Configuring SSH ..."
+		@if ! sudo grep -q '^StreamLocalBindUnlink' /etc/ssh/sshd_config; then \
+		echo "StreamLocalBindUnlink yes" | sudo tee -a /etc/ssh/sshd_config; \
+		sudo systemctl restart sshd; \
+	else \
+		echo "StreamLocalBindUnlink already set"; \
+	fi
 	@echo "OK!"

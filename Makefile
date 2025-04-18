@@ -264,6 +264,12 @@ fzf-darwin-arm64: ### Install fzf on Mac ARM64
 .PHONY: gnupg
 
 gnupg: ### Configure GnuPG
+	@if gpg --list-secret-keys | grep -q '^sec'; then \
+		echo "GnuPG private key is present!"; \
+	else \
+		echo "No GnuPG private key found! PLEASE IMPORT IT FIRST."; \
+		exit 1; \
+	fi
 	@echo "Configuring GNUPG ..."
 	mkdir -p ${HOME}/.gnupg && cp -av ./.gnupg/gpg-agent.conf ${HOME}/.gnupg/
 	@echo "OK!"

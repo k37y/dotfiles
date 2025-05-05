@@ -100,7 +100,9 @@ export PATH=${HOME}/.local/bin:${PATH}
 export PATH=/opt/homebrew/bin:${PATH}
 
 # GPG SSH
-gpg-agent --quiet --enable-ssh-support --daemon >/dev/null 2>&1
+if [[ -z "${SSH_CONNECTION}" ]]; then
+	gpg-agent --quiet --enable-ssh-support --daemon >/dev/null 2>&1
+fi
 export SSH_AUTH_SOCK="$(gpgconf --list-dirs agent-ssh-socket)"
 export GPG_TTY=$(tty)
 

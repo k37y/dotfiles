@@ -1,0 +1,29 @@
+#!/bin/bash
+
+# Max allowed file count
+MAX_FILES=5
+
+# Get current tracked file count (excluding deleted files)
+file_count=$(git ls-files | grep -E '^zsh_history\.[0-9]{8}$' | wc -l)
+
+echo "Current tracked file count: $file_count"
+
+# Only delete if file count exceeds the threshold
+if [ "$file_count" -gt "$MAX_FILES" ]; then
+    echo "Too many files. Trimming to $MAX_FILES files..."
+
+    # List files sorted by last modified time (oldest first)
+    files_to_delete=$(git ls-files -z | grep -z -E '^zsh_history\.[0-9]{8}$' | while IFS= read -r -d '' f; do m=$(stat -f "%m" "$f" 2>/dev/null || stat --format="%Y" "$f"); echo "$m $f"; done | sort -n | head -n $(($file_count - $MAX_FILES)) | cut -d' ' -f2-)
+
+    for file in $files_to_delete; do
+        echo "Deleting old file: $file"
+        # git rm "$file"
+    done
+
+    echo "Old files removed. Proceeding with commit."
+else
+    echo "File count within limit. No deletion needed."
+fi
+
+# Continue with commit
+exit 0

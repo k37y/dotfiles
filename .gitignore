@@ -26,6 +26,7 @@
 !/.git-crypt/.gitattributes
 !/.git-crypt/keys/default/0/14D8B9397A8F10DA44B00FE3B5CCF2B7D917627C.gpg
 !/.gitattributes
+!/.githooks
 !/.gitignore
 !/.i3/config
 !/.ideskrc

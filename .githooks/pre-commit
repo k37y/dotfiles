@@ -1,0 +1,89 @@
+#!/opt/homebrew/bin/bash
+
+set -euo pipefail
+
+# Configuration
+DATE=$(date +%d%m%Y)
+MAX_FILES=3
+BACKUP_DIR="."  # Change if you want a subfolder like "backups"
+
+# Declare file patterns
+declare -A FILES=(
+  ["zsh_history"]="$HOME/.zsh_history/zsh_history"
+  ["zsh_history.beaker"]="$HOME/.zsh_history/zsh_history.beaker"
+  ["zsh_history.fedora"]="$HOME/.zsh_history/zsh_history.fedora"
+)
+
+declare -A PATTERNS=(
+  ["zsh_history"]="^zsh_history\\.[0-9]{8}$"
+  ["zsh_history.beaker"]="^zsh_history\\.beaker\\.[0-9]{8}$"
+  ["zsh_history.fedora"]="^zsh_history\\.fedora\\.[0-9]{8}$"
+)
+
+# Colors (optional)
+GREEN='\033[0;32m'
+YELLOW='\033[1;33m'
+NC='\033[0m' # No Color
+
+# Backup files
+for key in "${!FILES[@]}"; do
+  src="${FILES[$key]}"
+  dest="$BACKUP_DIR/$key.$DATE"
+
+  if [[ ! -f "$dest" ]]; then
+    if [[ -f "$src" ]]; then
+      echo -e "${GREEN}Backing up $src → $dest${NC}"
+      cp "$src" "$dest"
+      git add "$dest"
+    else
+      echo -e "${YELLOW}Source not found: $src${NC}"
+    fi
+  else
+    echo "Skipping backup, file already exists: $dest"
+  fi
+done
+
+# Function to trim old backup files
+trim_files_for_pattern() {
+  local base="$1"
+  local regex="$2"
+
+  echo -e "\nTrimming pattern: $base"
+
+  # Find tracked files matching pattern
+  mapfile -d '' matched < <(git ls-files -z | grep -z -E "$regex")
+
+  local total=${#matched[@]}
+  echo "Found $total tracked file(s) for '$base'"
+
+  if (( total <= MAX_FILES )); then
+    echo "No need to delete for '$base'"
+    return
+  fi
+
+  # Prepare files with mtime
+  declare -a file_mtimes=()
+  for f in "${matched[@]}"; do
+    f_clean="${f//$'\0'/}"
+    if [[ -e "$f_clean" ]]; then
+      mtime=$(stat -f "%m" "$f_clean" 2>/dev/null || stat --format="%Y" "$f_clean")
+      file_mtimes+=("$mtime $f_clean")
+    fi
+  done
+
+  # Sort and trim
+  files_to_remove=$(printf "%s\n" "${file_mtimes[@]}" | sort -n | head -n $((total - MAX_FILES)) | cut -d' ' -f2-)
+
+  while read -r old_file; do
+    echo -e "${YELLOW}Removing: $old_file${NC}"
+    git rm -f "$old_file"
+  done <<< "$files_to_remove"
+}
+
+# Trim backups
+for key in "${!PATTERNS[@]}"; do
+  trim_files_for_pattern "$key" "${PATTERNS[$key]}"
+done
+
+echo -e "\n${GREEN}Backup and cleanup complete. Ready for commit.${NC}"
+exit 0
